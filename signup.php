@@ -18,7 +18,7 @@
 <body>
 	<center>
 	<div >
-		<form action = "" method = "POST" enctype = "utf-8"> 
+		<form action = "signup.php" method = "POST" enctype = "utf-8"> 
 			<p class="fieldset">
 				<label for="signup-username">First name</label>
 
