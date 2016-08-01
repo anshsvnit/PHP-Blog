@@ -44,7 +44,7 @@ if(login()){
 
 if (isset($_POST['login'])){
 	if(empty($_POST['username'])
-		echo "<script>alert('Please enter username')</script>";
+		{echo "<script>alert('Please enter username')</script>";}
 		else
 			$u = $_POST['username'];
 
@@ -52,35 +52,35 @@ if (isset($_POST['login'])){
 			echo "<script>alert('Please enter password')</script>"
 		else 
 			$p = $_POST['password'];
-	}
-	$sql = "SELECT 'Id','userName','password' FROM 'userdetails' WHERE 'username'= $u and 'password'= $p";
-	$result = mysqli_query($db,$sql);
-	$num=mysqli_num_rows($result);
-	$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-	
-	else if($num>1){
-		echo "<script>alert('The database is inconsistent Please Contact Administrator')</script>";
-		header('location:contact_admin.php');	
-	}
-	if($num==1){
-		$_SESSION['username']= $u;
-		$_SESSION['id'] = $row['Id'];
-		$_SESSION['login-with-blog'] = 1;
 
-		if ($rm == "on"){
-			setcookie("username",$_POST['username'],time()+60*60*24);
+		$sql = "SELECT 'Id','userName','password' FROM 'userdetails' WHERE 'username'= $u and 'password'= $p";
+		$result = mysqli_query($db,$sql);
+		$num=mysqli_num_rows($result);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+		else if($num>1){
+			echo "<script>alert('The database is inconsistent Please Contact Administrator')</script>";
+			header('location:contact_admin.php');	
+		}
+		if($num==1){
+			$_SESSION['username']= $u;
+			$_SESSION['id'] = $row['Id'];
+			$_SESSION['login-with-blog'] = 1;
+
+			if ($rm == "on"){
+				setcookie("username",$_POST['username'],time()+60*60*24);
+			}
+
+			if($_SESSION["username"]=="admin")
+				header("location:admin.php");
+			else {
+				header("location:home.php");
+			}
+		}
+		else{
+			echo "<script>alert('Either username or password is Incorrect')</script>";
 		}
 
-		if($_SESSION["username"]=="admin")
-			header("location:admin.php");
-		else {
-			header("location:home.php");
-		}
 	}
-	else{
-		echo "<script>alert('Either username or password is Incorrect')</script>";
-	}
-
-
 
 	?>
