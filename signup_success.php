@@ -1,3 +1,7 @@
+
+
+
+
 <html>
 <body>
 	<br><br><br><br>
@@ -8,7 +12,8 @@
 		Your Registration was Successful.			
 		<p>You will be automatically redirected in 5 seeconds</p>
 		<p><a href="home.php">Click here</a> to return to home page </p> 
-		<?php header('Refresh: 3;URL= signup.php');?>		
+		
+		<?php header('Refresh: 3;URL= signin.php');?>		
 	</div>
 </body>
 </html>

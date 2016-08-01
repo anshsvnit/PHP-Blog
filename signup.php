@@ -67,7 +67,7 @@ if(login()){
 
 <?php
 function checkduplicate($u,$e){
-				$db=mysqli_connect("localhost","root","","datablog") or die("Can not connect right now!");
+			$db=mysqli_connect("localhost","root","","datablog") or die("Can not connect right now!");
 
 			$sql1="SELECT `userName` FROM `userdetails` WHERE `username` = '$u'";
 			$sql2 = "SELECT `email` FROM `userdetails` WHERE `email` = '$e'";
@@ -118,7 +118,7 @@ if(isset($_POST["cre"])){
 			$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`contact`) VALUES ('$u','$f','$l','$p','$e','$c')";
 			if(mysqli_query($db,$sql)){
 				echo "<script>alert('Your blog account is created.');</script>";
-				header('location:signup_success.php');
+				header('Refresh: 2;URL= contact_admin.php');
 			}
 			else
 			{
