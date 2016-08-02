@@ -24,6 +24,7 @@ require 'blog_request.php';
 	<?php
 
 	function redirect(){
+		
 		header('location:display.php?get=A');
 	}
 

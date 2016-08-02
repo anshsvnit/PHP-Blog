@@ -71,7 +71,7 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 	{
 		echo "<script>alert('Please upload image.')</script>";}
 
-		else{
+	else{
 
 			$allowed = array('gif','png' ,'jpg');
 			$filename = $_FILES['file']['name'];
