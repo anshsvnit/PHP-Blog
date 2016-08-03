@@ -71,7 +71,7 @@ function display_blogs($priviledge){
 	echo "<div><p>";
 	$arr_result = mysqli_fetch_row($result);
 	$status = $arr_result[5];
-
+	$blog_id =  $arr_result[0];
 	echo "<br><br>";
 	echo $arr_result[0];
 		echo "<br>";
@@ -93,7 +93,11 @@ function display_blogs($priviledge){
 
 	echo $arr_result[6];
 	echo "<br>";
-	//echo $priviledge;
+
+	//$sql1 = "SELECT `image` FROM `blog_detail` WHERE `blog_id` = '$blog_id'";
+	echo "<img class='activator' src='get_image.php?id=".$blog_id."'>";
+
+
 	echo "</p></div>";
 	if($priviledge == "admin" && $_SESSION['username']=="admin"){
 		if($status == "A"){
@@ -114,6 +118,10 @@ function display_blogs($priviledge){
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
 		}
 	}
+	elseif($priviledge == "user"){
+		$var2 = $GLOBALS['tmp'];
+		echo "<a href = 'edit.php?id=".$arr_result[0]."&call=user'>Reject</a>";	
+	}
 }
 	}
 
@@ -128,6 +136,8 @@ function display_blogs($priviledge){
 			<a href = '?get=A'>Accepted List</a>
 			<a href = '?get=W'>Waiting List</a>
 			<a href = '?get=R'>Rejected List</a>
+			<a href = '?get=A'>My Blogs</a>
+
 		</p>
 	</div>
 
