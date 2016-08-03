@@ -1,16 +1,9 @@
 <?php
-	require "connect.php";
-	require "session.php";
-	if(!login())
-	{
-		header("location:../index.php");
-	}
-	if($_SESSION["username"]=="admin")
-		header('location:admin.php');
 
-	$id = $_SESSION['id'];
+$priviledge = "user";
 
-	$sql_all = "SELECT * FROM 'blogs' ORDER BY 'updated_on' DESC"
+require 'display.php';
 
-	$result = mysqli_query($db,$sql);
-	$all = mysqli_
+display_blogs($priviledge);
+
+?>

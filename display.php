@@ -93,7 +93,7 @@ function display_blogs($priviledge){
 
 	echo $arr_result[6];
 	echo "<br>";
-echo $priviledge;
+	//echo $priviledge;
 	echo "</p></div>";
 	if($priviledge == "admin" && $_SESSION['username']=="admin"){
 		if($status == "A"){
@@ -129,9 +129,6 @@ echo $priviledge;
 			<a href = '?get=W'>Waiting List</a>
 			<a href = '?get=R'>Rejected List</a>
 		</p>
-	</div>
-	<div>
-		<?php display_blogs("admin");?>
 	</div>
 
 <div>

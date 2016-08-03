@@ -16,6 +16,4 @@ require 'connect.php';
 
 	$result = mysqli_query($db,$sql);
 	$num_query = mysqli_num_rows($result);
-	echo $num_query;
-
 ?>
