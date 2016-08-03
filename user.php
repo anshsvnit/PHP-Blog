@@ -1,6 +1,6 @@
 <?php
 
-$priviledge = "admin";
+$priviledge = "user";
 
 require 'display.php';
 

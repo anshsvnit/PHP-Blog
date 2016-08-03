@@ -3,7 +3,7 @@ require 'connect.php';
 
 	if($tmp=="A"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='A'";
-
+		//echo "access A ";
 	}
 	elseif ($tmp=="W"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='W'";
@@ -16,6 +16,6 @@ require 'connect.php';
 
 	$result = mysqli_query($db,$sql);
 	$num_query = mysqli_num_rows($result);
-	
+	echo $num_query;
 
 ?>
