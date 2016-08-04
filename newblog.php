@@ -2,27 +2,53 @@
 require 'connect.php';
 require 'session.php';
 ?>
+<?php
+if(isset($_GET['edit'])){
+	$tmp = $_GET['edit'];
+	if($tmp == "Y"){
+		$bid = $_GET['blogid'];
+		echo $bid;
+		$sql = "SELECT `blog_id`,`title`,`detail`,`category` FROM `blogs` WHERE `blog_id`= '$bid'";
+		$result1 = mysqli_query($db,$sql);
 
+		$num_query = mysqli_num_rows($result1);
+		echo $num_query;
+		$row=mysqli_fetch_array($result1);
+	}
+}
+
+?>
 <html>
 
 <body>
 
-	<form action = "newblog.php" method = "POST" enctype = "multipart/form-data"> 
+	<form action = 
+	"<?php  
+		if(isset($_GET['edit'])){
+	$tmp = $_GET['edit'];
+	if($tmp == "Y"){
+		echo 'newblog.php?sender='.$_GET['sender'].'&edit=Y&blogid='.$_GET['blogid'];
+	}
+}
+else echo "newblog.php";
+	?>"
+
+	 method = "POST" enctype = "multipart/form-data"> 
 		<p class="fieldset">
 			<label for="signup-username">Blog Title</label>
 
-			<input class="image-replace cd-username" type = "text" name = "blogtitle" placeholder="Blog Title" maxlength = 30 required>
+			<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30 required>
 		</p>
 
 		<p class="fieldset">
 			<label for="signup-username">Details</label>
-			<textarea rows="6" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000">
+			<textarea rows="6" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000"><?php if (isset($_GET['edit']))echo $row[2];?> 
 			</Textarea>
 		</p>
 		<p class="fieldset">
 			<label for="signup-username">HashTags</label>
 
-			<input class="image-replace cd-username" type = "text" name = "tags" placeholder="HashTags" maxlength = 30 required>
+			<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30 required>
 		</p>
 
 		<p class="fieldset">
@@ -49,7 +75,7 @@ function getTags($string){
 		$string = $tagarray[0][0];
 		$i=1;
 		while(!empty($tagarray[0][$i])){
-			$string.=",";
+			$string.=" ";
 			$string.=$tagarray[0][$i];
 			$i++;
 		}
@@ -86,11 +112,31 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 
 			$tags = getTags($_POST['tags']);
 
+			if(isset($_GET['edit'])){
+	$tmp = $_GET['edit'];
+	$sender = $_GET['sender'];
+	$bid = $_GET['blogid'];
+
+	if($tmp == "Y"){
+		$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+		$sql1 = "UPDATE `blog_detail` SET `image`='$file' WHERE `blog_id` = '$bid'";
+		mysqli_query($db,$sql);
+		if(mysqli_query($db,$sql1)){
+				echo"<script>alert('Blog Updated Successfully')</script>";
+				header('Location: ' . $_SERVER['HTTP_REFERER']);			
+			}
+			else
+			{
+				echo"<script>alert('There was a problem in updating the blog')</script>";
+			}
+}
+	else{
 			$sql = "INSERT INTO `blogs`(`blogger_id`, `title`, `detail`, `category`, `status`, `editedBy`) VALUES ('$id','$t','$c','$tags','W','U')";
+			$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
 
 
 			mysqli_query($db,$sql);
-			$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
+			
 			$r=mysqli_query($db,$sql1);
 			$row=mysqli_fetch_array($r,MYSQLI_NUM);
 			$last_id=$row[0];
@@ -104,8 +150,10 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 
 			}
 		}
+		}
 
 	}
+}
 }
 
 

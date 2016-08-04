@@ -1,6 +1,5 @@
 <?php
 require 'connect.php';
-//header('content-type: image/jpeg');
 if (isset($_GET['id'])) {
 		$id=$_GET['id'];
 		$sql="SELECT `image` FROM `blog_detail` WHERE `blog_id`='$id'";

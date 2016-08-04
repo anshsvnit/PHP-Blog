@@ -1,4 +1,5 @@
 <?php 
+require 'session.php';
 
 $priviledge = "admin";
 

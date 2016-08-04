@@ -1,6 +1,6 @@
 <?php
-
-$priviledge = "user";
+//require 'session.php';
+$priviledge = $_SESSION['username'];
 
 require 'display.php';
 

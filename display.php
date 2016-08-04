@@ -1,12 +1,16 @@
 <?php 
 require 'connect.php';
-require 'session.php';
+//require 'session.php';
+
+$id = $_SESSION['id'];
+$user = $_SESSION['username'];
+
 
 if(isset($_GET['chd']) && isset($_GET['fun'])){
 	$var = $_GET['chd'];
 	$var1 = $_GET['get'];
 	$var3 = $_GET['fun'];
-	//echo $var1;
+	
 	if($var3=="D"){
 		$sql = "DELETE FROM `blogs` WHERE `blog_id` = '$var'";
 		$sql1 = "DELETE FROM `blog_detail` WHERE `blog_id` = '$var'";
@@ -63,6 +67,7 @@ else
 require 'blog_request.php';
 
 
+
 $priviledge = $GLOBALS['priviledge'];
 function display_blogs($priviledge){
 	$num_query = $GLOBALS['num_query'];
@@ -72,6 +77,9 @@ function display_blogs($priviledge){
 	$arr_result = mysqli_fetch_row($result);
 	$status = $arr_result[5];
 	$blog_id =  $arr_result[0];
+	echo $_SESSION['id'];
+	echo $arr_result[1];
+	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
 	echo "<br><br>";
 	echo $arr_result[0];
 		echo "<br>";
@@ -94,7 +102,6 @@ function display_blogs($priviledge){
 	echo $arr_result[6];
 	echo "<br>";
 
-	//$sql1 = "SELECT `image` FROM `blog_detail` WHERE `blog_id` = '$blog_id'";
 	echo "<img class='activator' src='get_image.php?id=".$blog_id."'>";
 
 
@@ -105,23 +112,30 @@ function display_blogs($priviledge){
 
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=R'>Reject</a>";
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
+			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+
 		}
 		elseif($status == "W"){
 			$var2 = $GLOBALS['tmp'];
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a>";
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
+			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+
 
 		}
 		elseif ($status == "R") {
 			$var2 = $GLOBALS['tmp'];
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a>";
 			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
+			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+
 		}
 	}
-	elseif($priviledge == "user"){
-		$var2 = $GLOBALS['tmp'];
-		echo "<a href = 'edit.php?id=".$arr_result[0]."&call=user'>Reject</a>";	
+		elseif($priviledge == $_SESSION['username']){
+			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
+			echo "<a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
 	}
+}
 }
 	}
 
