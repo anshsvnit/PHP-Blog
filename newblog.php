@@ -12,15 +12,26 @@ if(isset($_GET['edit'])){
 		$result1 = mysqli_query($db,$sql);
 
 		$num_query = mysqli_num_rows($result1);
-		echo $num_query;
+		//echo $num_query;
 		$row=mysqli_fetch_array($result1);
 	}
 }
 
 ?>
 <html>
+	<head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
 
 <body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script type="text/javascript" src="js/materialize.min.js"></script>
 
 	<form action = 
 	"<?php  
@@ -58,7 +69,11 @@ else echo "newblog.php";
 		</p>
 
 		<p class="fieldset">
-			<input class="full-width" type="submit" name="submit" value="Submit">
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+   				 <i class="material-icons right">send</i>
+ 			 </button>
+        
+			
 		</p>
 	</form>
 
@@ -120,8 +135,8 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 	if($tmp == "Y"){
 		$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
 		$sql1 = "UPDATE `blog_detail` SET `image`='$file' WHERE `blog_id` = '$bid'";
-		mysqli_query($db,$sql);
-		if(mysqli_query($db,$sql1)){
+		
+		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
 				echo"<script>alert('Blog Updated Successfully')</script>";
 				header('Location: ' . $_SERVER['HTTP_REFERER']);			
 			}

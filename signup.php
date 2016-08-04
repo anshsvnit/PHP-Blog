@@ -17,19 +17,22 @@ if(login()){
 
 <body>
 	<center>
+		 <div class="row">
+    <form action = "signup.php" method = "POST" enctype = "utf-8" class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
 		<div >
-			<form action = "signup.php" method = "POST" enctype = "utf-8"> 
-				<p class="fieldset">
-					<label for="signup-username">First name</label>
+			
+					
 
-					<input class="image-replace cd-username" type = "text" name = "fname" placeholder="First Name" maxlength = 30 required>
-				</p>
+					<input  type = "text" name = "fname" placeholder="First Name" maxlength = 30 required>
+					<label for="First">First name</label>
+				</div>
 
-				<p class="fieldset">
-					<label for="signup-username">Last name</label>
+					<label for="Last-Name">Last name</label>
 
 					<input class="image-replace cd-username" type = "text" name = "lname" placeholder="Last Name" maxlength = 30 required>
-				</p>
+				</div>
 				<p class="fieldset">
 					<label for="signup-username">Email Address </label>
 

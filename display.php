@@ -80,7 +80,30 @@ function display_blogs($priviledge){
 	echo $_SESSION['id'];
 	echo $arr_result[1];
 	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
-	echo "<br><br>";
+	
+
+
+	echo "
+	
+	<div class='row'>
+        <div style='margin: 0 auto;width:60%'>
+          <div class='card'>
+            <div class='card-image'>
+              <img src='get_image.php?id=".$blog_id."'>
+              <span class='card-title'>".$arr_result[2]."</span>
+            </div>
+            <div class='card-content'>
+            <p>".$arr_result[3]."</p>
+            </div>
+            <div class='card-action'>
+             <a href='#'>This is a link</a>
+
+            </div>
+         </div>
+       </div>
+    </div>
+   ";
+	/*echo "<br><br>";
 	echo $arr_result[0];
 		echo "<br>";
 
@@ -101,39 +124,57 @@ function display_blogs($priviledge){
 
 	echo $arr_result[6];
 	echo "<br>";
+*/
+	//echo "<img class='activator' src='get_image.php?id=".$blog_id."'>";
 
-	echo "<img class='activator' src='get_image.php?id=".$blog_id."'>";
+
+
+
+
+
+
 
 
 	echo "</p></div>";
 	if($priviledge == "admin" && $_SESSION['username']=="admin"){
 		if($status == "A"){
 			$var2 = $GLOBALS['tmp'];
-
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=R'>Reject</a>";
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
-			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
-
+			echo "<center><div>";
+			echo "<div class='style-button'><i class='small material-icons'>thumb_down</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=R'>Reject</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
+			echo "</div></center>";
 		}
 		elseif($status == "W"){
 			$var2 = $GLOBALS['tmp'];
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a>";
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
-			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+			echo "<center><div>";
+			//echo "";
+			echo "<div class='style-button'><i class='small material-icons'>thumb_up</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
+			echo "</div></center>";
 
 
 		}
 		elseif ($status == "R") {
+			echo "<center><div>";
+
 			$var2 = $GLOBALS['tmp'];
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a>";
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
-			echo "<a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+			echo "<div class='style-button'><i class='small material-icons'>thumb_up</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
+			echo "</div></center>";
 
 		}
 	}
 		elseif($priviledge == $_SESSION['username']){
-			echo "<a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a>";
-			echo "<a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a>";	
+			$var2 = $GLOBALS['tmp'];
+
+			echo "<center><div>";
+			echo "<div class='style-button'><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
+			echo "<div class='style-button' style = 'padding-left : 18%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
+			echo "</div></center>";
+
 	}
 }
 }
@@ -144,14 +185,25 @@ function display_blogs($priviledge){
 
 
 <html>
+ <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+ 		<link type="text/css" rel="stylesheet" href="css/style.css">
+       <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
 <body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script type="text/javascript" src="js/materialize.min.js"></script>
+
 	<div>
 		<p>
-			<a href = '?get=A'>Accepted List</a>
-			<a href = '?get=W'>Waiting List</a>
-			<a href = '?get=R'>Rejected List</a>
-			<a href = '?get=A'>My Blogs</a>
-
+			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=A'><i class="medium material-icons left">done</i>Accepted Blogs</a>
+			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=W'><i class="medium material-icons left">schedule</i>Waitlisted Blogs</a>
+			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=R'><i class="medium material-icons left">stop</i>Rejected Blogs</a>
 		</p>
 	</div>
 

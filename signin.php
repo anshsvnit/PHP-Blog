@@ -70,12 +70,12 @@ if (isset($_POST['login'])){
 				/*if ($rm == "on"){
 					setcookie("	username",$_POST['username'],time()+60*60*24);
 				}
-				/*
+				*/
 				if($_SESSION["username"]=="admin")
 					header("location:admin.php");
 				else {
 					header("location:home.php");
-				}*/
+				}
 			}
 
 			else{
