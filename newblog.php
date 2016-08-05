@@ -141,7 +141,7 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 		
 		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
 				echo"<script>alert('Blog Updated Successfully')</script>";
-				header('location:home.php');			
+				header('Refresh: 1;location:home.php');			
 			}
 			else
 			{
@@ -162,7 +162,7 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 			$sql2 = "INSERT INTO `blog_detail`(`blog_id`,`image`) VALUES('$last_id','$file')";
 			if(mysqli_query($db,$sql2)){
 				echo"<script>alert('Blog Added Successfully')</script>";
-				header('location:home.php');			
+				header('Refresh: 1;location:home.php');			
 
 			}
 			else

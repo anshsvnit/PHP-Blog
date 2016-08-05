@@ -7,6 +7,24 @@ if(login()){
 	else
 		header('location:home.php');
 }
+
+function checkuser ($username,$password,$caller){
+			$db = $GLOBALS['db'];
+			if($caller == "login"){
+			$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username' and `password`= '$password'";}
+			else
+			{
+				$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username'";}
+			$result = mysqli_query($db,$sql);
+			$num=mysqli_num_rows($result);
+			echo $username;
+			echo $caller;
+			echo $num;
+			//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			return $num;
+			}
+
+
 ?>
 
 
@@ -46,6 +64,20 @@ if(login()){
 			<input class="full-width" type="submit" name="login" value="Login">
 		</p>
 	</form>
+	<div>
+		<form action = "signin.php" method = "POST" enctype = "utf-8"> 
+	<p class="fieldset">
+			<label for="signup-username">Username</label>
+
+			<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+		</p>
+		<p class="fieldset">
+			<input class="full-width" type="submit" name="check" value="Check">
+		</p>
+</form>
+	<?php if(isset($GLOBALS['checkstatus'])){if($GLOBALS['checkstatus'] == 1) echo "The username is taken";}?>
+	</div>
+
 
 </body>
 
@@ -56,6 +88,7 @@ if(login()){
 
 if (isset($_POST['login'])){
 	echo "inside if";
+	$GLOBALS['checkstatus']=0;
 	if(empty($_POST['username']))
 		echo "<script>alert('Please enter username')</script>";
 
@@ -66,11 +99,7 @@ if (isset($_POST['login'])){
 			$u = $_POST['username'];
 			$p = $_POST['password'];
 
-			$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$u' and `password`= '$p'";
-			$result = mysqli_query($db,$sql);
-			$num=mysqli_num_rows($result);
-			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-
+			$num = checkuser($u,$p, "login");
 			if($num>1){
 				echo "<script>alert('The database is inconsistent Please Contact Administrator')</script>";
 				header('location:contact_admin.php');	
@@ -97,5 +126,11 @@ if (isset($_POST['login'])){
 			}
 		}
 	}
-
+if(isset($_POST['check'])){
+$u = $_POST['username'];
+if (checkuser($u,"","check")>=1){
+	echo "The username is taken";
+	$GLOBALS['checkstatus'] = 1;
+}
+}
 	?>

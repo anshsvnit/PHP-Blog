@@ -170,7 +170,7 @@ function display_blogs($priviledge){
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
        <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <a href="index.php" class="brand-logo">Blogger</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
       	<?php if(login()){
       		echo "<li>Hi ".$_SESSION['username']."</li>";
@@ -180,9 +180,8 @@ function display_blogs($priviledge){
         <li><a href="newblog.php">Add Blog</a></li>
         <?php if($priviledge=="admin"){
         	$link = "edituser.php";
-        	echo "<li><a href= ".$link." >Add Blog</a></li>";
+        	echo "<li><a href= ".$link." >Edit User</a></li>";
         }?>
-        <li><a href="collapsible.html">JavaScript</a></li>
       </ul>
     </div>
   </nav>

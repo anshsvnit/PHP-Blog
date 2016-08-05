@@ -2,7 +2,7 @@
 <body>
 	<br><br><br><br>
 	<div align="center" style="padding:25px">
-		<img src = "congrats.png" alt ="Congratulations." style="align:centre;width:304px;height:228px;">
+		<img src = "images/congrats.png" alt ="Congratulations." style="align:centre;width:304px;height:228px;">
 	</div>
 	<div align="center">
 		Your Registration was Successful.			
