@@ -55,6 +55,7 @@ if(login()){
 <?php
 
 if (isset($_POST['login'])){
+	echo "inside if";
 	if(empty($_POST['username']))
 		echo "<script>alert('Please enter username')</script>";
 
@@ -78,6 +79,7 @@ if (isset($_POST['login'])){
 				$_SESSION['username']= $u;
 				$_SESSION['id'] = $row['Id'];
 				$_SESSION['login-with-blog'] = 1;
+				setcookie("username",$u,time()+60*60*24);
 
 				/*if ($rm == "on"){
 					setcookie("	username",$_POST['username'],time()+60*60*24);

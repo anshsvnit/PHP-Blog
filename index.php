@@ -43,7 +43,7 @@ else{
 	$usernameblogger = mysqli_fetch_row($result1);
 	//$status = $arr_result[5];
 	//$blog_id =  $arr_result[0];
-	echo $_SESSION['id'];
+	//echo $_SESSION['id'];
 	//echo $arr_result[1];?>
 
 	

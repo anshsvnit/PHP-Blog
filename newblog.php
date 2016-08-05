@@ -48,7 +48,7 @@ else echo "newblog.php";
 		<p class="fieldset">
 			<label for="signup-username">Blog Title</label>
 
-			<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30 required>
+			<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30>
 		</p>
 
 		<p class="fieldset">
@@ -59,7 +59,7 @@ else echo "newblog.php";
 		<p class="fieldset">
 			<label for="signup-username">HashTags</label>
 
-			<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30 required>
+			<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
 		</p>
 
 		<p class="fieldset">
@@ -69,11 +69,7 @@ else echo "newblog.php";
 		</p>
 
 		<p class="fieldset">
-			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-   				 <i class="material-icons right">send</i>
- 			 </button>
-        
-			
+			<input type="submit" value ="submit" name="action">
 		</p>
 	</form>
 
@@ -100,8 +96,8 @@ function getTags($string){
 		return NULL;
 }
 
-if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
-
+if (isset($_POST['action']) && $_FILES['file']['size']>0){
+	echo "inside if";
 	if(empty($_POST['blogtitle'])){
 		echo"<script>alert('Please give Title to the Blog')</script>";
 	}
@@ -131,7 +127,7 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 	$tmp = $_GET['edit'];
 	$sender = $_GET['sender'];
 	$bid = $_GET['blogid'];
-
+}
 	if($tmp == "Y"){
 		if($_SESSION["username"]=="admin"){
 
@@ -145,7 +141,7 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 		
 		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
 				echo"<script>alert('Blog Updated Successfully')</script>";
-				header('Location: ' . $_SERVER['HTTP_REFERER']);			
+				header('location:home.php');			
 			}
 			else
 			{
@@ -155,7 +151,8 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 	else{
 			$sql = "INSERT INTO `blogs`(`blogger_id`, `title`, `detail`, `category`, `status`, `editedBy`) VALUES ('$id','$t','$c','$tags','W','U')";
 			$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
-
+			echo $t;
+			echo $c;
 
 			mysqli_query($db,$sql);
 			
@@ -165,6 +162,8 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 			$sql2 = "INSERT INTO `blog_detail`(`blog_id`,`image`) VALUES('$last_id','$file')";
 			if(mysqli_query($db,$sql2)){
 				echo"<script>alert('Blog Added Successfully')</script>";
+				header('location:home.php');			
+
 			}
 			else
 			{
@@ -172,7 +171,7 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 
 			}
 		}
-		}
+		
 
 	}
 }

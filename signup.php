@@ -54,10 +54,7 @@ if(login()){
 
 					<input class="image-replace cd-username" type = "number" name = "contact" placeholder="Contact Number"> 
 				</p>
-				<p class="fieldset">
-
-					<input class="full-width has-padding" type="submit" value="Create account" name="cre">
-				</p>
+			
 <p class="fieldset">
 			<label for="signup-username">Upload a file</label>
 			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
@@ -65,11 +62,7 @@ if(login()){
 		</p>
 
 		<p class="fieldset">
-			<button class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
-   				 <i class="material-icons right">send</i>
- 			 </button>
-        
-			
+			<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
 		</p>
 
 			</form>
@@ -106,7 +99,7 @@ function checkduplicate($u,$e){
 	}
 		}
 
-if(isset($_POST["cre"]) && $_FILES['file']['size'] > 0){
+if(isset($_POST["cre"])){
 	if(empty($_POST["username"]))
 		echo "<script>alert('Please enter username');</script>";
 	else if(empty($_POST["fname"]))

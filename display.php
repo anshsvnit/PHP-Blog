@@ -109,38 +109,7 @@ function display_blogs($priviledge){
        </div>
     </div>
    ";
-	/*echo "<br><br>";
-	echo $arr_result[0];
-		echo "<br>";
-
-	echo $arr_result[1];
-		echo "<br>";
-
-	echo $arr_result[2];
-	echo "<br>";
-
-	echo $arr_result[3];
-	echo "<br>";
-
-	echo $arr_result[4];
-	echo "<br>";
-
-	echo $arr_result[5];
-	echo "<br>";
-
-	echo $arr_result[6];
-	echo "<br>";
-*/
-	//echo "<img class='activator' src='get_image.php?id=".$blog_id."'>";
-
-
-
-
-
-
-
-
-
+	
 	echo "</p></div>";
 	if($priviledge == "admin" && $_SESSION['username']=="admin"){
 		if($status == "A"){
@@ -199,6 +168,27 @@ function display_blogs($priviledge){
  		<link type="text/css" rel="stylesheet" href="css/style.css">
        <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      	<?php if(login()){
+      		echo "<li>Hi ".$_SESSION['username']."</li>";
+      	}?>
+
+        <li><a href="signout.php">Sign Out</a></li>
+        <li><a href="newblog.php">Add Blog</a></li>
+        <?php if($priviledge=="admin"){
+        	$link = "edituser.php";
+        	echo "<li><a href= ".$link." >Add Blog</a></li>";
+        }?>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
     </head>
 
 <body>
@@ -207,9 +197,9 @@ function display_blogs($priviledge){
 
 	<div>
 		<p>
-			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=A'><i class="medium material-icons left">done</i>Accepted Blogs</a>
-			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=W'><i class="medium material-icons left">schedule</i>Waitlisted Blogs</a>
-			<a class="waves-effect waves-light btn" style = 'font-size:30'href = '?get=R'><i class="medium material-icons left">stop</i>Rejected Blogs</a>
+			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=A'><i class="medium material-icons left">done</i>Accepted Blogs</a>
+			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=W'><i class="medium material-icons left">schedule</i>Waitlisted Blogs</a>
+			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=R'><i class="medium material-icons left">stop</i>Rejected Blogs</a>
 		</p>
 	</div>
 
