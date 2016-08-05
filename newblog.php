@@ -133,7 +133,14 @@ if (isset($_POST['submit']) && $_FILES['file']['size'] > 0){
 	$bid = $_GET['blogid'];
 
 	if($tmp == "Y"){
-		$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+		if($_SESSION["username"]=="admin"){
+
+		$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='A', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+		}
+		else
+			{
+				$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+			}
 		$sql1 = "UPDATE `blog_detail` SET `image`='$file' WHERE `blog_id` = '$bid'";
 		
 		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){

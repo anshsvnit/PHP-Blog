@@ -58,7 +58,19 @@ if(login()){
 
 					<input class="full-width has-padding" type="submit" value="Create account" name="cre">
 				</p>
+<p class="fieldset">
+			<label for="signup-username">Upload a file</label>
+			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+			<input name="file" type="file" id="file"> 
+		</p>
 
+		<p class="fieldset">
+			<button class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
+   				 <i class="material-icons right">send</i>
+ 			 </button>
+        
+			
+		</p>
 
 			</form>
 		</div>
@@ -94,7 +106,7 @@ function checkduplicate($u,$e){
 	}
 		}
 
-if(isset($_POST["cre"])){
+if(isset($_POST["cre"]) && $_FILES['file']['size'] > 0){
 	if(empty($_POST["username"]))
 		echo "<script>alert('Please enter username');</script>";
 	else if(empty($_POST["fname"]))
@@ -105,6 +117,9 @@ if(isset($_POST["cre"])){
 		echo "<script>alert('Please enter E-mail ID');</script>";
 	else if(empty($_POST["password"]))
 		echo "<script>alert('Please enter Password');</script>";
+	elseif(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
+	{
+		echo "<script>alert('Please upload image.')</script>";}
 
 	else{
 		$u = $_POST['username'];
@@ -112,13 +127,23 @@ if(isset($_POST["cre"])){
 		$l = $_POST["lname"];
 		$e = $_POST["emailaddr"];
 		$p = $_POST["password"];
+
+			$allowed = array('gif','png' ,'jpg');
+			$filename = $_FILES['file']['name'];
+			$ext = pathinfo($filename, PATHINFO_EXTENSION);
+			if(!in_array($ext,$allowed)) 
+				echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
+			else{
+				$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));}
+
+
 		if(empty($_POST["contact"]))
 			$c=NULL;
 		else
 			$c = $_POST["contact"];
 		
 		if(checkduplicate($u,$e)=="TRUE"){
-			$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`contact`) VALUES ('$u','$f','$l','$p','$e','$c')";
+			$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$c','$file')";
 			if(mysqli_query($db,$sql)){
 				echo "<script>alert('Your blog account is created.');</script>";
 				header('Refresh: 2;URL= contact_admin.php');

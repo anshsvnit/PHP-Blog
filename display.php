@@ -75,10 +75,15 @@ function display_blogs($priviledge){
 	for($i=0;$i<$num_query;$i++){
 	echo "<div><p>";
 	$arr_result = mysqli_fetch_row($result);
-	$status = $arr_result[5];
+	$bloggerid = $arr_result[1];
+	$db = $GLOBALS['db'];
+	$sql1 = "SELECT `userName`FROM `userdetails` WHERE `Id` = '$bloggerid'";
+	$result1 = mysqli_query($db,$sql1);
+	$usernameblogger = mysqli_fetch_row($result1);
+	//$status = $arr_result[5];
 	$blog_id =  $arr_result[0];
-	echo $_SESSION['id'];
-	echo $arr_result[1];
+	//echo $_SESSION['id'];
+	//echo $arr_result[1];
 	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
 	
 
@@ -89,8 +94,9 @@ function display_blogs($priviledge){
         <div style='margin: 0 auto;width:60%'>
           <div class='card'>
             <div class='card-image'>
-              <img src='get_image.php?id=".$blog_id."'>
+              <img src='get_image.php?pic_source=blog&id=".$blog_id."'>
               <span class='card-title'>".$arr_result[2]."</span>
+              <span class='card-title' style = 'left:85%'>".$usernameblogger[0]."</span>
             </div>
             <div class='card-content'>
             <p>".$arr_result[3]."</p>
@@ -196,7 +202,7 @@ function display_blogs($priviledge){
     </head>
 
 <body>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
      <script type="text/javascript" src="js/materialize.min.js"></script>
 
 	<div>

@@ -1,5 +1,9 @@
 <?php 
 require 'session.php';
+if(login()){
+	if($_SESSION['username']!="admin")
+		header('location:home.php');
+}
 
 $priviledge = "admin";
 
