@@ -17,14 +17,12 @@ function checkuser ($username,$password,$caller){
 				$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username'";}
 			$result = mysqli_query($db,$sql);
 			$num=mysqli_num_rows($result);
-			echo $username;
+			/*echo $username;
 			echo $caller;
-			echo $num;
+			echo $num;*/
 			//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 			return $num;
 			}
-
-
 ?>
 
 
@@ -42,42 +40,48 @@ function checkuser ($username,$password,$caller){
 
 <body>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-     <script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<div class="row" style= 'width:50%;'>
+		<form class="col s12" action = "signin.php" method = "POST" enctype = "utf-8"> 
+			<div class="row">
+				<div class="input-field col s12">
 
-	<form action = "signin.php" method = "POST" enctype = "utf-8"> 
-		<p class="fieldset">
-			<label for="signup-username">Username</label>
+					<label for="signup-username">Username</label>
 
-			<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
-		</p>
+					<input class="validate" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<label for="signup-username">Password</label>
 
-		<p class="fieldset">
-			<label for="signup-username">Password</label>
+					<input class="validate" type = "password" name = "password" placeholder="Password" required> 
+				</div>
+			</div>
+			<div class="row">
 
-			<input class="image-replace cd-username" type = "password" name = "password" placeholder="Password" required> 
-		</p>
-		<p class="fieldset">
-			<a href="forget.php">Forgot your password?</a>
-		</p>
+				<a href="forget.php">Forgot your password?</a>
+			</div>
 
-		<p class="fieldset">
-			<input class="full-width" type="submit" name="login" value="Login">
-		</p>
-	</form>
+			<input  type="submit" name="login" value="Login">
+		</form>
+	</div>
 	<div>
 		<form action = "signin.php" method = "POST" enctype = "utf-8"> 
-	<p class="fieldset">
-			<label for="signup-username">Username</label>
+			<div class="row">
+				<div class="input-field col s12">
+				<label for="signup-username">Username</label>
 
-			<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
-		</p>
-		<p class="fieldset">
-			<input class="full-width" type="submit" name="check" value="Check">
-		</p>
-</form>
-	<?php if(isset($GLOBALS['checkstatus'])){if($GLOBALS['checkstatus'] == 1) echo "The username is taken";}?>
+				<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+			</div>
+		</div>
+			<p class="fieldset">
+				<input class="full-width" type="submit" name="check" value="check">
+			</p>
+		</form>
+
+
 	</div>
-
 
 </body>
 
@@ -85,6 +89,22 @@ function checkuser ($username,$password,$caller){
 
 
 <?php
+
+if(isset($_POST['check'])){
+	$u = $_POST['username'];
+	if (checkuser($u,"","check")>=1)
+	{ 
+		echo "<script>alert('The username is taken')</script>";
+		unset($_POST['check']);
+	} 
+	else {
+		echo "<script>alert('Username is available')</script>";
+				unset($_POST['check']);
+
+	}
+}
+
+
 
 if (isset($_POST['login'])){
 	echo "inside if";
@@ -126,11 +146,5 @@ if (isset($_POST['login'])){
 			}
 		}
 	}
-if(isset($_POST['check'])){
-$u = $_POST['username'];
-if (checkuser($u,"","check")>=1){
-	echo "The username is taken";
-	$GLOBALS['checkstatus'] = 1;
-}
-}
+
 	?>

@@ -50,10 +50,7 @@ if(isset($_GET['chd']) && isset($_GET['fun'])){
 		else{
 			echo "<script>alert('There was some error');</script>";
 			header('location:'."?get=".$var1);
-
 		}
-
-
 	}
 }
 
@@ -174,6 +171,7 @@ function display_blogs($priviledge){
       <ul id="nav-mobile" class="right hide-on-med-and-down">
       	<?php if(login()){
       		echo "<li>Hi ".$_SESSION['username']."</li>";
+      		echo " <li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>";
       	}?>
 
         <li><a href="signout.php">Sign Out</a></li>
@@ -193,7 +191,12 @@ function display_blogs($priviledge){
 <body>
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
      <script type="text/javascript" src="js/materialize.min.js"></script>
-
+     <script>
+     	$(document).ready(function(){
+     		$('.modal-trigger').leanModal();
+     	})	
+    	 
+     </script>
 	<div>
 		<p>
 			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=A'><i class="medium material-icons left">done</i>Accepted Blogs</a>
@@ -201,6 +204,10 @@ function display_blogs($priviledge){
 			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=R'><i class="medium material-icons left">stop</i>Rejected Blogs</a>
 		</p>
 	</div>
+	<div class = "modal" id = "profile_modal">
+		
+	</div> 
+
 
 <div>
 	<?php
