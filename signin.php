@@ -28,21 +28,33 @@ function checkuser ($username,$password,$caller){
 
 <html>
 <head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<nav>
+		<div class="nav-wrapper">
+			<a href="index.php" class="brand-logo">Blogger</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="index.php">Home</a></li>
+				        <li><a href="message.php">Contact Us</a></li>
+
+			</ul>
+		</div>
+	</nav>
+
+</head>
 
 
-<body>
+<body class="card-panel teal lighten-2">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<div class="row" style= 'width:50%;'>
-		<form class="col s12" action = "signin.php" method = "POST" enctype = "utf-8"> 
+	<div class="row" style= 'width:50%;margin:30px auto;'>
+		<form class=" card-panel  blue lighten-4 col s12" style ='padding: 40px;'action = "signin.php" method = "POST" enctype = "utf-8"> 
 			<div class="row">
 				<div class="input-field col s12">
 
@@ -65,22 +77,6 @@ function checkuser ($username,$password,$caller){
 
 			<input  type="submit" name="login" value="Login">
 		</form>
-	</div>
-	<div>
-		<form action = "signin.php" method = "POST" enctype = "utf-8"> 
-			<div class="row">
-				<div class="input-field col s12">
-				<label for="signup-username">Username</label>
-
-				<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
-			</div>
-		</div>
-			<p class="fieldset">
-				<input class="full-width" type="submit" name="check" value="check">
-			</p>
-		</form>
-
-
 	</div>
 
 </body>

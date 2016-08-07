@@ -179,7 +179,10 @@ function display_blogs($priviledge){
         <?php if($priviledge=="admin"){
         	$link = "edituser.php";
         	echo "<li><a href= ".$link." >Edit User</a></li>";
-        }?>
+        }
+        else
+        	echo "<li><a href='message.php'>Contact Us</a></li>";
+?>
       </ul>
     </div>
   </nav>
