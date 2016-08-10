@@ -41,7 +41,10 @@ function checkuser ($username,$password,$caller){
 			<a href="index.php" class="brand-logo">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
+								<li><a href="Signup.php">Signup</a></li>
+
 				        <li><a href="message.php">Contact Us</a></li>
+
 
 			</ul>
 		</div>
