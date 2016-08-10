@@ -38,7 +38,7 @@ if(login()){
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<center>
 		<div class="row" style= 'width:50%;margin:30px auto;'>
-			<form class=" card-panel  blue lighten-4 col s12" style ='padding: 40px;'action = "signin.php" method = "POST" enctype = "utf-8"> 
+			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
 				<div class="row">
 					<div class="input-field col s6">
 						<input  type = "text" name = "fname" placeholder="First Name" maxlength = 30 required>
@@ -81,31 +81,16 @@ if(login()){
 						<input class="image-replace cd-username" type = "number" name = "contact" placeholder="Contact Number"> 
 					</div>
 				</div>
-
+<div class="row">
+					<div class="input-field col s12">
 				<label for="signup-username">Upload a file</label>
 				<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 				<input name="file" type="file" id="file"> 
-
+</div></div>
 
 				<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
 
 			</form>
-			<div class="row" style= 'width:50%;margin:30px auto'>
-		<form class=" card-panel  blue lighten-4 col s12" action = "signin.php" method = "POST" enctype = "utf-8"> 
-			<div class="row">
-				<div class="input-field col s12">
-				<label for="signup-username">Username</label>
-
-				<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
-			</div>
-		</div>
-			<p class="fieldset">
-				<input class="full-width" type="submit" name="check" value="check">
-			</p>
-		</form>
-
-
-	</div>
 			
 		</div>
 	</center>
@@ -139,8 +124,9 @@ function checkduplicate($u,$e){
 		return "TRUE";
 	}
 }
+echo $_POST["cre"];
 
-if(isset($_POST["cre"])){
+if(isset($_POST["cre"]) &&  $_FILES['file']['size']>0){
 	if(empty($_POST["username"]))
 		echo "<script>alert('Please enter username');</script>";
 	else if(empty($_POST["fname"]))
