@@ -66,9 +66,12 @@ else{
    echo "<div><p>";
    $arr_result = mysqli_fetch_row($result);
    $bloggerid = $arr_result[1];
-   $sql1 = "SELECT `userName`FROM `userdetails` WHERE `Id` = '$bloggerid'";
+   $sql1 = "SELECT `userName`, `status` FROM `userdetails` WHERE `Id` = '$bloggerid'";
    $result1 = mysqli_query($db,$sql1);
    $usernameblogger = mysqli_fetch_row($result1);
+   if($usernameblogger['status']=="N"){
+    continue;
+   }
 	//$status = $arr_result[5];
 	//$blog_id =  $arr_result[0];
 	//echo $_SESSION['id'];
