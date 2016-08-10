@@ -124,7 +124,7 @@ function checkduplicate($u,$e){
 		return "TRUE";
 	}
 }
-echo $_POST["cre"];
+//echo $_POST["cre"];
 
 if(isset($_POST["cre"]) &&  $_FILES['file']['size']>0){
 	if(empty($_POST["username"]))

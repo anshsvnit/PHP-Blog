@@ -26,7 +26,7 @@ if(isset($_GET['delete'])){
     $sql2 = "DELETE FROM `blog_detail` WHERE `blog_id` IN ('$ids')";
     mysqli_query($db, $sql2);
 
-    $sql3 = "DELETE FROM `userdetails` WHERE `blogger_id` = 'id'";
+    $sql3 = "DELETE FROM `blogs` WHERE `blogger_id` = '$id'";
     mysqli_query($db, $sql3);
 
   }
@@ -127,16 +127,16 @@ $num_rows = mysqli_num_rows($result);
               echo '<td>'."Active".'</td>';
             }
 echo '<td>';
-//echo $row['Id'];
-echo "<a class='dropdown-button btn' data-activates='dropdown1'>Action</a>".$blogger_id."
+echo "<a class='dropdown-button btn' data-activates='dropdown".$blogger_id."'>Action</a>
+  <ul id='dropdown".$blogger_id."' class='dropdown-content'>";
+   echo "<li><a href='#'".$blogger_id."'>Profile</a></li>";
 
-  <ul id='dropdown1' class='dropdown-content'>";
    if($row['status'] == "N"){
     echo "<li><a href='?act=true&id=".$blogger_id."'>Activate</a></li>";
-    echo "<li>".$blogger_id."</li>";}
+    }
     else{
     echo "<li><a href='?deact=true&id=".$blogger_id."'>Deactivate</a></li>";
-        echo "<li>".$blogger_id."</li>";}
+        }
 
  echo "<li><a href='?delete=true&id=".$blogger_id."'>Delete</a></li>
     
