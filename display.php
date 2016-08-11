@@ -174,15 +174,29 @@ function display_blogs($priviledge){
       		echo " <li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>";
       	}?>
 
-        <li><a href="signout.php">Sign Out</a></li>
-        <li><a href="newblog.php">Add Blog</a></li>
+       
+        <?php
+        $name = $_SESSION['username'];
+	    $sql = "SELECT `status` FROM `userdetails` WHERE `userName` = '$name'";
+        $result = mysqli_query($db,$sql);
+        $row = mysqli_fetch_assoc($result);
+        ?>
         <?php if($priviledge=="admin"){
         	$link = "edituser.php";
         	echo "<li><a href= ".$link." >Edit User</a></li>";
         }
         else
         	echo "<li><a href='message.php'>Contact Us</a></li>";
-?>
+        	if($row['status']=='N'){
+        		echo "<li><a href='newblog.php' class=disabled>Add Blog</a></li>";
+
+        	}
+        	else{
+        echo "<li><a href='newblog.php'>Add Blog</a></li>";
+
+        	}
+        ?>
+         <li><a href="signout.php">Sign Out</a></li>
       </ul>
     </div>
   </nav>
