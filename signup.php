@@ -75,6 +75,15 @@ if(login()){
 					</div>
 				</div>
 				<div class="row">
+					<div class="input-field col s6">
+
+						<label for="signup-username">About Me</label>
+
+						<input class="image-replace cd-username" type = "text" name = "abtme" placeholder="User Name" maxlength = 30 required>
+					</div>
+				</div>
+
+				<div class="row">
 					<div class="input-field col s12">
 						<label for="signup-username">Contact</label>
 
@@ -86,13 +95,31 @@ if(login()){
 						<label for="signup-username">Upload a file</label>
 						<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 						<input name="file" type="file" id="file"> 
-					</div></div>
+					</div>
+				</div>
 
 					<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
 
 				</form>
 				
 			</div>
+			<div>
+			<div class="row" style= 'width:50%;margin:30px auto;'>
+			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
+			<div class="row">
+					<div class="input-field col s6">
+
+						<label for="signup-username">Username</label>
+
+						<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+					</div>
+			</div>
+
+
+			</form>
+
+			</div>
+
 		</center>
 	</body>
 
@@ -124,7 +151,6 @@ if(login()){
 			return "TRUE";
 		}
 	}
-//echo $_POST["cre"];
 
 	if(isset($_POST["cre"]) &&  $_FILES['file']['size']>0){
 		if(empty($_POST["username"]))
@@ -147,6 +173,7 @@ if(login()){
 				$l = $_POST["lname"];
 				$e = $_POST["emailaddr"];
 				$p = $_POST["password"];
+				$abtme = $_POST["abtme"];
 
 				$allowed = array('gif','png' ,'jpg');
 				$filename = $_FILES['file']['name'];
@@ -156,14 +183,13 @@ if(login()){
 				else{
 					$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));}
 
-
 					if(empty($_POST["contact"]))
 						$c=NULL;
 					else
 						$c = $_POST["contact"];
 
 					if(checkduplicate($u,$e)=="TRUE"){
-						$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$c','$file')";
+						$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`aboutme`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$abtme',$c','$file')";
 						if(mysqli_query($db,$sql)){
 							echo "<script>alert('Your blog account is created.');</script>";
 							header('Refresh: 2;URL= contact_admin.php');

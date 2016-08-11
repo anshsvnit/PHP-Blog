@@ -1,6 +1,6 @@
 <?php 
 require 'connect.php';
-//require 'session.php';
+require 'profile.php';
 
 $id = $_SESSION['id'];
 $user = $_SESSION['username'];
@@ -77,10 +77,9 @@ function display_blogs($priviledge){
 	$sql1 = "SELECT `userName`FROM `userdetails` WHERE `Id` = '$bloggerid'";
 	$result1 = mysqli_query($db,$sql1);
 	$usernameblogger = mysqli_fetch_row($result1);
-	//$status = $arr_result[5];
+
 	$blog_id =  $arr_result[0];
-	//echo $_SESSION['id'];
-	//echo $arr_result[1];
+	
 	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
 	
 
@@ -185,7 +184,7 @@ function display_blogs($priviledge){
         	$link = "edituser.php";
         	echo "<li><a href= ".$link." >Edit User</a></li>";
         }
-        else
+        else{
         	echo "<li><a href='message.php'>Contact Us</a></li>";
         	if($row['status']=='N'){
         		echo "<li><a href='newblog.php' class=disabled>Add Blog</a></li>";
@@ -193,8 +192,8 @@ function display_blogs($priviledge){
         	}
         	else{
         echo "<li><a href='newblog.php'>Add Blog</a></li>";
-
         	}
+        }
         ?>
          <li><a href="signout.php">Sign Out</a></li>
       </ul>
