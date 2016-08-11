@@ -12,27 +12,40 @@ if(isset($_GET['edit'])){
 		$result1 = mysqli_query($db,$sql);
 
 		$num_query = mysqli_num_rows($result1);
-		//echo $num_query;
 		$row=mysqli_fetch_array($result1);
 	}
 }
 
 ?>
 <html>
-	<head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<head>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="index.php" class="brand-logo">Blogger</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li>Hi <?php echo $_SESSION['username'];?></li>
+				<li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>
+				<li><a href='message.php'>Contact Us</a></li>
+				<li><a href="signout.php">Sign Out</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+</head>
 
 <body>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
      <script type="text/javascript" src="js/materialize.min.js"></script>
-
+<center>
+		<div class="row" style= 'width:50%;margin:30px auto;'>
 	<form action = 
 	"<?php  
 		if(isset($_GET['edit'])){
@@ -44,7 +57,7 @@ if(isset($_GET['edit'])){
 else echo "newblog.php";
 	?>"
 
-	 method = "POST" enctype = "multipart/form-data"> 
+	 method = "POST" enctype = "multipart/form-data" class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;"> 
 		<p class="fieldset">
 			<label for="signup-username">Blog Title</label>
 
@@ -53,7 +66,7 @@ else echo "newblog.php";
 
 		<p class="fieldset">
 			<label for="signup-username">Details</label>
-			<textarea rows="6" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000"><?php if (isset($_GET['edit']))echo $row[2];?> 
+			<textarea style = "height:20%;width:100%" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000"><?php if (isset($_GET['edit']))echo $row[2];?> 
 			</Textarea>
 		</p>
 		<p class="fieldset">
@@ -62,15 +75,17 @@ else echo "newblog.php";
 			<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
 		</p>
 
-		<p class="fieldset">
-			<label for="signup-username">Upload a file</label>
-			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-			<input name="file" type="file" id="file"> 
-		</p>
-
-		<p class="fieldset">
-			<input type="submit" value ="submit" name="action">
-		</p>
+		<div class="row">
+			<div class="input-field col s12">
+				<label for="signup-username">Upload a file</label>
+				<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+				<input name="file" type="file" id="file"> 
+			</div>
+		</div>
+	<div class="row">
+			<div class="input-field col s12">
+		<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="action">
+</div></div>
 	</form>
 
 </body>
