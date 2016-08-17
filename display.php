@@ -1,7 +1,6 @@
 <?php 
 require 'connect.php';
-//require 'session.php';
-//require 'profile.php';
+
 
 $id = $_SESSION['id'];
 $user = $_SESSION['username'];
@@ -104,7 +103,7 @@ function display_blogs($priviledge){
             <div class='card-action'>";
              $i=0;
         while(!empty($tagarray[0][$i])){
-          echo "<a href = '?hash=".substr($tagarray[0][$i], 1)."'>".$tagarray[0][$i]."</a>";
+          echo "<a href = 'index.php?hash=".substr($tagarray[0][$i], 1)."'>".$tagarray[0][$i]."</a>";
           $i++;
         }
 		echo "
