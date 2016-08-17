@@ -6,6 +6,10 @@ require 'connect.php';
 $id = $_SESSION['id'];
 $user = $_SESSION['username'];
 
+function parsehash($string){
+  preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
+  return $tagarray;
+}
 
 if(isset($_GET['chd']) && isset($_GET['fun'])){
 	$var = $_GET['chd'];
@@ -17,7 +21,6 @@ if(isset($_GET['chd']) && isset($_GET['fun'])){
 		$sql1 = "DELETE FROM `blog_detail` WHERE `blog_id` = '$var'";
 		$db = $GLOBALS['db'];
 		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
-			echo "query running";
 			header('location:'."?get=".$var1);
 		}
 		else{
@@ -31,7 +34,6 @@ if(isset($_GET['chd']) && isset($_GET['fun'])){
 		$db = $GLOBALS['db'];
 
 		if(mysqli_query($db,$sql)){
-			echo "query running";
 			header('location:'."?get=".$var1);
 		}
 		else{
@@ -45,7 +47,6 @@ if(isset($_GET['chd']) && isset($_GET['fun'])){
 		$db = $GLOBALS['db'];
 
 		if(mysqli_query($db,$sql)){
-			echo "query running";
 			header('location:'."?get=".$var1);
 		}
 		else{
@@ -84,7 +85,7 @@ function display_blogs($priviledge){
 	$usernameblogger = mysqli_fetch_row($result1);
 	$status = $arr_result[5];
 	$blog_id =  $arr_result[0];
-	
+	$tagarray = parsehash($arr_result[4]);
 	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
 	
 	echo "
@@ -100,9 +101,13 @@ function display_blogs($priviledge){
             <div class='card-content'>
             <p>".$arr_result[3]."</p>
             </div>
-            <div class='card-action'>
-             <a href='#'>This is a link</a>
-
+            <div class='card-action'>";
+             $i=0;
+        while(!empty($tagarray[0][$i])){
+          echo "<a href = '?hash=".substr($tagarray[0][$i], 1)."'>".$tagarray[0][$i]."</a>";
+          $i++;
+        }
+		echo "
             </div>
          </div>
        </div>
@@ -122,7 +127,6 @@ function display_blogs($priviledge){
 		elseif($status == "W"){
 			$var2 = $GLOBALS['tmp'];
 			echo "<center><div>";
-			//echo "";
 			echo "<div class='style-button'><i class='small material-icons'>thumb_up</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a></div>";
 			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
 			echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
