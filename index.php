@@ -6,10 +6,15 @@ if(isset($_SESSION['username'])){
 
 }
 
+function parsehash($string){
+  preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
+  return $tagarray;
+}
+
 if(isset($_GET['hash'])){
 	$hash = $_GET['hash'];
 
-	$sql = "SELECT `blog_id`, `blogger_id`, `title`, `detail`,`category`,`updated_on` FROM `blogs` WHERE `status` = 'A' AND `category` LIKE '%'$hash'%' ORDER BY updated_on DESC";
+	$sql = "SELECT `blog_id`, `blogger_id`, `title`, `detail`,`category`,`updated_on` FROM `blogs` WHERE `status` = 'A' AND `category` LIKE '%$hash%' ORDER BY updated_on DESC";
 	$result = mysqli_query($db,$sql);
 	$num_query = mysqli_num_rows($result);
 }
@@ -18,6 +23,9 @@ else{
   $result = mysqli_query($db,$sql);
   $num_query = mysqli_num_rows($result);
 }
+
+
+
 
 ?>
 
@@ -32,10 +40,12 @@ else{
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Blogger</a>
+      <a href="index.php" class="brand-logo">Blogger</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <?php if(login()){
           echo "<li>Hi ".$_SESSION['username']."</li>";
+                    echo "<li><a href='home.php'>Home</a></li>";
+
           echo "<li><a href='signout.php'>Sign Out</a></li>";
           echo "<li><a href='newblog.php'>Add Blog</a></li>";
           if($_SESSION['username']=="admin"){
@@ -65,16 +75,17 @@ else{
  for($i=0;$i<$num_query;$i++){
    echo "<div><p>";
    $arr_result = mysqli_fetch_row($result);
-   $bloggerid = $arr_result['blogger_id'];
+   $bloggerid = $arr_result[1];
    $sql1 = "SELECT `userName`, `status` FROM `userdetails` WHERE `Id` = '$bloggerid'";
    $result1 = mysqli_query($db,$sql1);
    $usernameblogger = mysqli_fetch_row($result1);
-   if($usernameblogger['status']=="N"){
+   if($usernameblogger[1]=="N"){
     continue;
    }
+   $tagarray = parsehash($arr_result[4]);
+
 	$status = $arr_result[5];
 	$blog_id =  $arr_result[0];
-	//echo $_SESSION['id'];
 	echo $arr_result[1];?>
 
 	
@@ -91,7 +102,13 @@ else{
           <p><?php echo $arr_result[3]?></p>
         </div>
         <div class='card-action'>
-         <a href='#'>This is a link</a>
+        <?php
+        $i=0;
+        while(!empty($tagarray[0][$i])){
+          echo "<a href = '?hash=".substr($tagarray[0][$i], 1)."'>".$tagarray[0][$i]."</a>";
+          $i++;
+        }
+        ?>
 
        </div>
      </div>
