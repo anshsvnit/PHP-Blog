@@ -7,6 +7,7 @@ if(login()){
 	else
 		header('location:home.php');
 }
+$id = 0;
 
 function checkuser ($username,$password,$caller){
 			$db = $GLOBALS['db'];
@@ -17,6 +18,8 @@ function checkuser ($username,$password,$caller){
 				$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username'";}
 			$result = mysqli_query($db,$sql);
 			$num=mysqli_num_rows($result);
+			$row = mysqli_fetch_assoc($result);
+			$GLOBALS['id']= $row['Id'];
 			/*echo $username;
 			echo $caller;
 			echo $num;*/
@@ -103,8 +106,6 @@ if(isset($_POST['check'])){
 	}
 }
 
-
-
 if (isset($_POST['login'])){
 	echo "inside if";
 	$GLOBALS['checkstatus']=0;
@@ -124,15 +125,15 @@ if (isset($_POST['login'])){
 				header('location:contact_admin.php');	
 			}
 			else if($num==1){
+
 				$_SESSION['username']= $u;
-				$_SESSION['id'] = $row['Id'];
+				$_SESSION['id'] = $GLOBALS['id'];
 				$_SESSION['login-with-blog'] = 1;
 				setcookie("username",$u,time()+60*60*24);
-
-				/*if ($rm == "on"){
+				//echo $GLOBALS['id'];
+				if ($rm == "on"){
 					setcookie("	username",$_POST['username'],time()+60*60*24);
 				}
-				*/
 				if($_SESSION["username"]=="admin")
 					header("location:admin.php");
 				else {

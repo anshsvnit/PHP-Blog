@@ -15,5 +15,6 @@ $priviledge = $_SESSION['username'];
 require 'display.php';
 
 display_blogs($priviledge);
+echo $_SESSION['id'];
 
 ?>

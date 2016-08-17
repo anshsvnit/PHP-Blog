@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-if (isset($_GET['id']) && isset(($_GET['pic_source'])) {
+if (isset($_GET['id']) && isset(($_GET['pic_source']))) {
 		$id=$_GET['id'];
 		$pic_source = $_GET['pic_source'];
 		if($pic_source=="blog"){

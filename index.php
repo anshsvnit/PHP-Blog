@@ -65,24 +65,24 @@ else{
  for($i=0;$i<$num_query;$i++){
    echo "<div><p>";
    $arr_result = mysqli_fetch_row($result);
-   $bloggerid = $arr_result[1];
+   $bloggerid = $arr_result['blogger_id'];
    $sql1 = "SELECT `userName`, `status` FROM `userdetails` WHERE `Id` = '$bloggerid'";
    $result1 = mysqli_query($db,$sql1);
    $usernameblogger = mysqli_fetch_row($result1);
    if($usernameblogger['status']=="N"){
     continue;
    }
-	//$status = $arr_result[5];
-	//$blog_id =  $arr_result[0];
+	$status = $arr_result[5];
+	$blog_id =  $arr_result[0];
 	//echo $_SESSION['id'];
-	//echo $arr_result[1];?>
+	echo $arr_result[1];?>
 
 	
 	<div class='row'>
     <div style='margin: 0 auto;width:60%'>
       <div class='card'>
         <div class='card-image'>
-          <img src="get_image.php?pic_source=blog&id="<?php echo $arr_result[0];?>>
+          <img src="get_image.php?pic_source=blog&id=<?php echo $arr_result[0];?>">
           <span class='card-title'><?php echo $arr_result[2]?></span>
           <span class='card-title' style = 'left:85%'><?php echo $usernameblogger[0]?></span>
 

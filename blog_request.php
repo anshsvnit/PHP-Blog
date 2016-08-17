@@ -1,6 +1,7 @@
 <?php 
 require 'connect.php';
-
+echo $_SESSION['username'].'<br>';
+echo $priviledge;
 if($priviledge == "admin"){
 	if($tmp=="A"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='A' ORDER BY `updated_on` DESC";

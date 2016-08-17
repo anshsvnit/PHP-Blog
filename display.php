@@ -1,6 +1,7 @@
 <?php 
 require 'connect.php';
-require 'profile.php';
+//require 'session.php';
+//require 'profile.php';
 
 $id = $_SESSION['id'];
 $user = $_SESSION['username'];
@@ -63,7 +64,11 @@ else
 
 require 'blog_request.php';
 
-
+$db = $GLOBALS['db'];
+$sql2 = "SELECT `status` FROM `userdetails` WHERE `Id`= '$id'";
+$result2 = mysqli_query($db, $sql2);
+$resultarray = mysqli_fetch_row($result2);
+$userstatus= $resultarray[0];
 
 $priviledge = $GLOBALS['priviledge'];
 function display_blogs($priviledge){
@@ -77,13 +82,11 @@ function display_blogs($priviledge){
 	$sql1 = "SELECT `userName`FROM `userdetails` WHERE `Id` = '$bloggerid'";
 	$result1 = mysqli_query($db,$sql1);
 	$usernameblogger = mysqli_fetch_row($result1);
-
+	$status = $arr_result[5];
 	$blog_id =  $arr_result[0];
 	
 	if($priviledge=="admin" || $arr_result[1]==$_SESSION['id']){
 	
-
-
 	echo "
 	
 	<div class='row'>
@@ -171,29 +174,25 @@ function display_blogs($priviledge){
       	<?php if(login()){
       		echo "<li>Hi ".$_SESSION['username']."</li>";
       		echo " <li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>";
+			echo "<li><a href='home.php'>Home</a></li>";
+
       	}?>
 
-       
-        <?php
-        $name = $_SESSION['username'];
-	    $sql = "SELECT `status` FROM `userdetails` WHERE `userName` = '$name'";
-        $result = mysqli_query($db,$sql);
-        $row = mysqli_fetch_assoc($result);
-        ?>
         <?php if($priviledge=="admin"){
         	$link = "edituser.php";
         	echo "<li><a href= ".$link." >Edit User</a></li>";
         }
         else{
-        	echo "<li><a href='message.php'>Contact Us</a></li>";
-        	if($row['status']=='N'){
-        		echo "<li><a href='newblog.php' class=disabled>Add Blog</a></li>";
+        	if($GLOBALS['userstatus'] == "N"){
+        		echo "<li><a href='newblog.php' class = 'disabled'>Add Blog</a></li>";
+        	}
+        	else {
+   					echo "<li><a href='newblog.php'>Add Blog</a></li>";
 
         	}
-        	else{
-        echo "<li><a href='newblog.php'>Add Blog</a></li>";
+        	echo "<li><a href='message.php'>Contact Us</a></li>";
         	}
-        }
+        
         ?>
          <li><a href="signout.php">Sign Out</a></li>
       </ul>

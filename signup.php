@@ -98,25 +98,25 @@ if(login()){
 					</div>
 				</div>
 
-					<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
-
-				</form>
-				
-			</div>
-			<div>
-			<div class="row" style= 'width:50%;margin:30px auto;'>
-			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
-			<div class="row">
-					<div class="input-field col s6">
-
-						<label for="signup-username">Username</label>
-
-						<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
-					</div>
-			</div>
-
+				<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
 
 			</form>
+			
+		</div>
+		<div>
+			<div class="row" style= 'width:50%;margin:30px auto;'>
+				<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
+					<div class="row">
+						<div class="input-field col s6">
+
+							<label for="signup-username">Username</label>
+
+							<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+						</div>
+					</div>
+
+
+				</form>
 
 			</div>
 

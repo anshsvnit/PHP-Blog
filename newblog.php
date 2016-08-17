@@ -16,6 +16,9 @@ if(isset($_GET['edit'])){
 	}
 }
 
+echo $_SESSION['id'];
+echo $_SESSION['username'];
+
 ?>
 <html>
 <head>
@@ -30,7 +33,8 @@ if(isset($_GET['edit'])){
 		<div class="nav-wrapper">
 			<a href="index.php" class="brand-logo">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li>Hi <?php echo $_SESSION['username'];?></li>
+				<li>Hi <?php echo $_SESSION['username'];?></li>
+				<li><a href='home.php'>Home</a></li>";
 				<li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>
 				<li><a href='message.php'>Contact Us</a></li>
 				<li><a href="signout.php">Sign Out</a></li>
@@ -43,50 +47,52 @@ if(isset($_GET['edit'])){
 
 <body>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-     <script type="text/javascript" src="js/materialize.min.js"></script>
-<center>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<center>
 		<div class="row" style= 'width:50%;margin:30px auto;'>
-	<form action = 
-	"<?php  
-		if(isset($_GET['edit'])){
-	$tmp = $_GET['edit'];
-	if($tmp == "Y"){
-		echo 'newblog.php?sender='.$_GET['sender'].'&edit=Y&blogid='.$_GET['blogid'];
-	}
-}
-else echo "newblog.php";
-	?>"
+			<form action = 
+			"<?php  
+			if(isset($_GET['edit'])){
+				$tmp = $_GET['edit'];
+				if($tmp == "Y"){
+					echo 'newblog.php?sender='.$_GET['sender'].'&edit=Y&blogid='.$_GET['blogid'];
+				}
+			}
+			else echo "newblog.php";
+			?>"
 
-	 method = "POST" enctype = "multipart/form-data" class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;"> 
-		<p class="fieldset">
-			<label for="signup-username">Blog Title</label>
+			method = "POST" enctype = "multipart/form-data" class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;"> 
+			<div class="fieldset">
+				<label for="signup-username">Blog Title</label>
 
-			<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30>
-		</p>
-
-		<p class="fieldset">
-			<label for="signup-username">Details</label>
-			<textarea style = "height:20%;width:100%" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000"><?php if (isset($_GET['edit']))echo $row[2];?> 
-			</Textarea>
-		</p>
-		<p class="fieldset">
-			<label for="signup-username">HashTags</label>
-
-			<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
-		</p>
-
-		<div class="row">
-			<div class="input-field col s12">
-				<label for="signup-username">Upload a file</label>
-				<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-				<input name="file" type="file" id="file"> 
+				<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30>
 			</div>
-		</div>
-	<div class="row">
-			<div class="input-field col s12">
-		<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="action">
-</div></div>
-	</form>
+
+			<div class="fieldset">
+				<label for="signup-username">Details</label>
+				<textarea style = "height:20%;width:100%" id="blog-detail" placeholder="Write your blog here. Max word limit is 5000" name="detail" maxlength="5000"><?php if (isset($_GET['edit']))echo $row[2];?> 
+				</textarea>
+			</div>
+			<p class="fieldset">
+				<label for="signup-username">HashTags</label>
+
+				<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
+			</p>
+
+			<div class="row">
+				<div class="input-field col s12">
+					<label for="signup-username">Upload a file</label>
+					<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+					<input name="file" type="file" id="file"> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="action">
+				</div></div>
+			</div>
+		</form>
+	</center>
 
 </body>
 
@@ -123,7 +129,7 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 	{
 		echo "<script>alert('Please upload image.')</script>";}
 
-	else{
+		else{
 
 			$allowed = array('gif','png' ,'jpg');
 			$filename = $_FILES['file']['name'];
@@ -135,62 +141,66 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 				$t=$_POST['blogtitle'];
 				$c=$_POST['detail'];
 				$id=$_SESSION['id'];
+				echo $_SESSION['id'];
+				echo $t;
 
-			$tags = getTags($_POST['tags']);
+				$tags = getTags($_POST['tags']);
 
-			if(isset($_GET['edit'])){
-	$tmp = $_GET['edit'];
-	$sender = $_GET['sender'];
-	$bid = $_GET['blogid'];
-}
-	if($tmp == "Y"){
-		if($_SESSION["username"]=="admin"){
+				if(isset($_GET['edit'])){
+					$tmp = $_GET['edit'];
+					$sender = $_GET['sender'];
+					$bid = $_GET['blogid'];
+				}
+				if($tmp == "Y"){
+					if($_SESSION["username"]=="admin"){
 
-		$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='A', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+						$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='A', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+					}
+					else
+					{
+						$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
+					}
+					$sql1 = "UPDATE `blog_detail` SET `image`='$file' WHERE `blog_id` = '$bid'";
+
+					if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
+						echo"<script>alert('Blog Updated Successfully')</script>";
+						header('Refresh: 1;location:home.php');			
+					}
+					else
+					{
+						echo"<script>alert('There was a problem in updating the blog')</script>";
+					}
+				}
+				else{
+					$sql = "INSERT INTO `blogs`(`blogger_id`, `title`, `detail`, `category`, `status`, `editedBy`) VALUES ('$id','$t','$c','$tags','W','U')";
+					$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
+					echo $id;
+
+					echo $t;
+					echo $c;
+
+					mysqli_query($db,$sql);
+
+					$r=mysqli_query($db,$sql1);
+					$row=mysqli_fetch_array($r,MYSQLI_NUM);
+					$last_id=$row[0];
+					$sql2 = "INSERT INTO `blog_detail`(`blog_id`,`image`) VALUES('$last_id','$file')";
+					if(mysqli_query($db,$sql2)){
+						echo"<script>alert('Blog Added Successfully')</script>";
+						header('Refresh: 1;location:home.php');			
+
+					}
+					else
+					{
+						echo"<script>alert('There was a problem in posting the blog')</script>";
+
+					}
+				}
+
+
+			}
 		}
-		else
-			{
-				$sql = "UPDATE `blogs` SET `title`='$t', `detail`='$c', `category`='$tags', `status`='W', `editedBy`='$sender' WHERE `blog_id` = '$bid'";
-			}
-		$sql1 = "UPDATE `blog_detail` SET `image`='$file' WHERE `blog_id` = '$bid'";
-		
-		if(mysqli_query($db,$sql1) && mysqli_query($db,$sql)){
-				echo"<script>alert('Blog Updated Successfully')</script>";
-				header('Refresh: 1;location:home.php');			
-			}
-			else
-			{
-				echo"<script>alert('There was a problem in updating the blog')</script>";
-			}
-}
-	else{
-			$sql = "INSERT INTO `blogs`(`blogger_id`, `title`, `detail`, `category`, `status`, `editedBy`) VALUES ('$id','$t','$c','$tags','W','U')";
-			$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
-			echo $t;
-			echo $c;
-
-			mysqli_query($db,$sql);
-			
-			$r=mysqli_query($db,$sql1);
-			$row=mysqli_fetch_array($r,MYSQLI_NUM);
-			$last_id=$row[0];
-			$sql2 = "INSERT INTO `blog_detail`(`blog_id`,`image`) VALUES('$last_id','$file')";
-			if(mysqli_query($db,$sql2)){
-				echo"<script>alert('Blog Added Successfully')</script>";
-				header('Refresh: 1;location:home.php');			
-
-			}
-			else
-			{
-				echo"<script>alert('There was a problem in posting the blog')</script>";
-
-			}
-		}
-		
-
 	}
-}
-}
 
 
-?>
+	?>
