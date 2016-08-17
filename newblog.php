@@ -7,7 +7,6 @@ if(isset($_GET['edit'])){
 	$tmp = $_GET['edit'];
 	if($tmp == "Y"){
 		$bid = $_GET['blogid'];
-		echo $bid;
 		$sql = "SELECT `blog_id`,`title`,`detail`,`category` FROM `blogs` WHERE `blog_id`= '$bid'";
 		$result1 = mysqli_query($db,$sql);
 
@@ -16,8 +15,6 @@ if(isset($_GET['edit'])){
 	}
 }
 
-echo $_SESSION['id'];
-echo $_SESSION['username'];
 
 ?>
 <html>
@@ -118,7 +115,6 @@ function getTags($string){
 }
 
 if (isset($_POST['action']) && $_FILES['file']['size']>0){
-	echo "inside if";
 	if(empty($_POST['blogtitle'])){
 		echo"<script>alert('Please give Title to the Blog')</script>";
 	}
@@ -142,7 +138,6 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 				$c=$_POST['detail'];
 				$id=$_SESSION['id'];
 				echo $_SESSION['id'];
-				echo $t;
 
 				$tags = getTags($_POST['tags']);
 
@@ -174,11 +169,7 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 				else{
 					$sql = "INSERT INTO `blogs`(`blogger_id`, `title`, `detail`, `category`, `status`, `editedBy`) VALUES ('$id','$t','$c','$tags','W','U')";
 					$sql1 = "SELECT `blog_id` from `blogs` ORDER BY `blog_id` DESC";
-					echo $id;
-
-					echo $t;
-					echo $c;
-
+			
 					mysqli_query($db,$sql);
 
 					$r=mysqli_query($db,$sql1);
