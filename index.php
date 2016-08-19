@@ -72,6 +72,20 @@ else{
 
 
  <?php
+function displayblank(){
+echo "<div style='
+    align-content: center;
+    text-align: -webkit-center;
+    font-size: xx-large;
+    '>";
+  echo "There are no blogs to display";
+echo "</div";
+}
+
+if($num_query == 0 ){
+    displayblank();
+  }
+
  for($i=0;$i<$num_query;$i++){
    echo "<div><p>";
    $arr_result = mysqli_fetch_row($result);
@@ -90,8 +104,8 @@ else{
 
 	
 	<div class='row'>
-    <div style='margin: 0 auto;width:60%'>
-      <div class='card'>
+    <div style='margin: 0 auto;width:50%'>
+      <div class='card large'>
         <div class='card-image'>
           <img src="get_image.php?pic_source=blog&id=<?php echo $arr_result[0];?>">
           <span class='card-title'><?php echo $arr_result[2]?></span>

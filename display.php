@@ -71,9 +71,33 @@ $resultarray = mysqli_fetch_row($result2);
 $userstatus= $resultarray[0];
 
 $priviledge = $GLOBALS['priviledge'];
+function displayblank($tmp){
+	if($tmp == "W"){
+		$string = "Waitlisted";
+	}
+	elseif ($tmp == "R") {
+		$string = "Rejected";
+	}
+	elseif ($tmp == "A") {
+		$string = "Accepted";
+	}
+echo "<div style='
+    align-content: center;
+    text-align: -webkit-center;
+    font-size: xx-large;
+    '>";
+	echo "There are no ".$string." blogs to display";
+echo "</div";
+}
+
+
 function display_blogs($priviledge){
 	$num_query = $GLOBALS['num_query'];
 	$result = $GLOBALS['result'];
+	if($num_query == 0 ){
+		displayblank($GLOBALS['tmp']);
+	}
+
 	for($i=0;$i<$num_query;$i++){
 	echo "<div><p>";
 	$arr_result = mysqli_fetch_row($result);
@@ -90,8 +114,8 @@ function display_blogs($priviledge){
 	echo "
 	
 	<div class='row'>
-        <div style='margin: 0 auto;width:60%'>
-          <div class='card'>
+        <div style='margin: 0 auto;width:50%'>
+          <div class='card large'>
             <div class='card-image'>
               <img src='get_image.php?pic_source=blog&id=".$blog_id."'>
               <span class='card-title'>".$arr_result[2]."</span>

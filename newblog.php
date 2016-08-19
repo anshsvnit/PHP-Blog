@@ -31,7 +31,7 @@ if(isset($_GET['edit'])){
 			<a href="index.php" class="brand-logo">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li>Hi <?php echo $_SESSION['username'];?></li>
-				<li><a href='home.php'>Home</a></li>";
+				<li><a href='home.php'>Home</a></li>
 				<li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>
 				<li><a href='message.php'>Contact Us</a></li>
 				<li><a href="signout.php">Sign Out</a></li>
