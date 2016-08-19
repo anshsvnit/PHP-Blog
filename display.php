@@ -208,6 +208,7 @@ function display_blogs($priviledge){
         <?php if($priviledge=="admin"){
         	$link = "edituser.php";
         	echo "<li><a href= ".$link." >Edit User</a></li>";
+        	echo "<li><a href='displaymessage.php'>Messages</a></li>";
         }
         else{
         	if($GLOBALS['userstatus'] == "N"){
