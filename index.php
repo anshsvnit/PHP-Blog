@@ -24,9 +24,6 @@ else{
   $num_query = mysqli_num_rows($result);
 }
 
-
-
-
 ?>
 
 <html>
@@ -39,8 +36,10 @@ else{
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <nav>
-    <div class="nav-wrapper">
-      <a href="index.php" class="brand-logo">Blogger</a>
+    <div class="nav-wrapper" style = "background-color: #ff4343;">
+      <a href="index.php" class="brand-logo" style="
+    padding-left: 30px;
+">Blogger</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <?php if(login()){
           echo "<li>Hi ".$_SESSION['username']."</li>";
@@ -66,7 +65,7 @@ else{
 
 </head>
 
-<body>
+<body class ="indigo darken-4">
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
  <script type="text/javascript" src="js/materialize.min.js"></script>
 

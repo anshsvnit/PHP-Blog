@@ -21,8 +21,8 @@ if(login()){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 	<nav>
-		<div class="nav-wrapper">
-			<a href="index.php" class="brand-logo">Blogger</a>
+		<div class="nav-wrapper" style = "background-color: #ff4343;">
+			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="message.php">Contact Us</a></li>
@@ -33,12 +33,12 @@ if(login()){
 	<title>Sign Up User</title>
 </head>
 
-<body>
+<body class ="indigo darken-4">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<center>
 		<div class="row" style= 'width:50%;margin:30px auto;'>
-			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
+			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;background-color: #fdf8e4;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
 				<div class="row">
 					<div class="input-field col s6">
 						<input  type = "text" name = "fname" placeholder="First Name" maxlength = 30 required>

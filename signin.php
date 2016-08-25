@@ -40,8 +40,10 @@ function checkuser ($username,$password,$caller){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 	<nav>
-		<div class="nav-wrapper">
-			<a href="index.php" class="brand-logo">Blogger</a>
+		<div class="nav-wrapper" style = "background-color: #ff4343;">
+			<a href="index.php" class="brand-logo" style="
+    padding-left: 30px;
+">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
 								<li><a href="Signup.php">Signup</a></li>
@@ -56,7 +58,7 @@ function checkuser ($username,$password,$caller){
 </head>
 
 
-<body class="card-panel teal lighten-2">
+<body class =" card-panel indigo darken-4">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<div class="row" style= 'width:50%;margin:30px auto;'>
