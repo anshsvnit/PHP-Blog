@@ -42,7 +42,7 @@ function getemail($id){
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<center>
 		<div class="row" style= 'width:50%;margin:30px auto;'>
-			<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;background-color: #fdf8e4;" action = "message.php" method = "POST" enctype = "multipart/form-data"> 
+			<form class=" card-panel " style ="padding: 40px;background-color: #fdf8e4;" action = "message.php" method = "POST" enctype = "multipart/form-data"> 
 				<div class="row">
 					<div class="input-field col s6">
 						<label for="Title">Title</label>

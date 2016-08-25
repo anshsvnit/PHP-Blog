@@ -46,7 +46,7 @@ if(isset($_GET['edit'])){
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<center>
-		<div class="row" style= 'width:50%;margin:30px auto;background-color: #fdf8e4;'>
+		<div class="row" style= 'width:50%;margin:30px auto;'>
 			<form action = 
 			"<?php  
 			if(isset($_GET['edit'])){
@@ -58,7 +58,7 @@ if(isset($_GET['edit'])){
 			else echo "newblog.php";
 			?>"
 
-			method = "POST" enctype = "multipart/form-data" class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;"> 
+			method = "POST" enctype = "multipart/form-data" class=" card-panel" style ="padding: 40px;background-color: #fdf8e4;"> 
 			<div class="fieldset">
 				<label for="signup-username">Blog Title</label>
 
