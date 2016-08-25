@@ -69,9 +69,8 @@ $num_rows = mysqli_num_rows($result);
        <nav>
 
     <div class="nav-wrapper" style = "background-color: #ff4343;">
-      <a href="index.php" class="brand-logo" style="
-    padding-left: 30px;
-">Blogger</a>
+      <a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
+
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <?php if(login()){
           echo "<li>Hi ".$_SESSION['username']."</li>";
@@ -106,9 +105,9 @@ $num_rows = mysqli_num_rows($result);
  <table class="striped centered">
         <thead>
           <tr>
-              <th data-field="id" style="width:15%;">BloggerId</th>
-              <th data-field="name" style="width:45%;">Username</th>
-              <th data-field="status" style="width:25%;">Status</th>
+              <th data-field="id" style="width:15%;color: #ff8585;">BloggerId</th>
+              <th data-field="name" style="width:45%;color: #ff8585;">Username</th>
+              <th data-field="status" style="width:40%;color: #ff8585;">Status</th>
           </tr>
         </thead>
 

@@ -83,8 +83,7 @@ function displayblank($tmp){
 echo "<div style='
     align-content: center;
     text-align: -webkit-center;
-    font-size: xx-large;
-    '>";
+    font-size: xx-large;'>";
 
 	echo "<img src = 'images/blank.jpg' alt ='No Blog' style='align:centre;width:304px;height:228px;'>";
 	echo "<p style='color: gold;'>There are no ".$string." to display.</p>";
@@ -280,5 +279,3 @@ function display_blogs($priviledge){
 </div>
 	</body>
 	</html>
-
-
