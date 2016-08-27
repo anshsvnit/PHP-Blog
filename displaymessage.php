@@ -1,4 +1,14 @@
+<?php
+require 'connect.php';
+require 'session.php';
 
+
+
+
+$sql = "SELECT * FROM `contact` ORDER BY `status`";
+$result = mysqli_query($db,$sql);
+$num_query= mysqli_num_rows($result);
+?>
 
 
 <html>
@@ -23,6 +33,32 @@
   </nav>
 </head>
 <body>
+<?php
+for($i =0; $i<$num_query;$i++){
+$row = mysqli_fetch_row($result);
 
+?>
+
+
+
+ <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><?php echo $row[2]?></span>
+              <p>By <?php echo $row[1]?></p>
+              <p><?php echo $row[3]?></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Mark as Read</a>
+              <a href="#">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<?php
+}
+?>
 
 </body>
+</html>

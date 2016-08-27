@@ -187,11 +187,7 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 
 					}
 				}
-
-
 			}
 		}
 	}
-
-
 	?>

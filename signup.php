@@ -91,27 +91,33 @@ if(login()){
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12">
-						<label for="signup-username">Upload a file</label>
+				
+						<label for="signup-username">Upload a Profile Picture</label>
 						<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 						<input name="file" type="file" id="file"> 
+				
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
 					</div>
 				</div>
-
-				<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="cre">
-
 			</form>
 			
 		</div>
 		<div>
 			<div class="row" style= 'width:50%;margin:30px auto;'>
-				<form class=" card-panel  blue lighten-4 col s12" style ="padding: 40px;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
+				<form class=" card-panel" style ="padding: 40px;background-color: #fdf8e4;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
 					<div class="row">
 						<div class="input-field col s6">
 
 							<label for="signup-username">Username</label>
 
-							<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+							<input class="image-replace cd-username" type = "text" name = "userdetail" placeholder="User Name" maxlength = 30 required>
+						</div>
+						<div class="row">
+							<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="usercheck">
+							</div>
 						</div>
 					</div>
 
@@ -205,6 +211,13 @@ if(login()){
 
 					}
 
+				}
+			}
+
+			if(isset($_POST["usercheck"])){
+				$user = $_POST['userdetail'];
+				if(checkduplicate($user,"nodata")){
+					echo "<script>alert('Username Available');</script>";
 				}
 			}
 

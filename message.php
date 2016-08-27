@@ -103,8 +103,7 @@ if (isset($_POST['submit'])){
 
 			}
 			else {
-							echo "<script>alert('There was a problem contacting admin');</script>";
-
+					echo "<script>alert('There was a problem contacting admin');</script>";
 			}
 		}
 }
