@@ -44,14 +44,14 @@ function getemail($id){
 		<div class="row" style= 'width:50%;margin:30px auto;'>
 			<form class=" card-panel " style ="padding: 40px;background-color: #fdf8e4;" action = "message.php" method = "POST" enctype = "multipart/form-data"> 
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 						<label for="Title">Title</label>
 
 						<input  type = "text" name = "title" placeholder="Message Title" maxlength = 30 required>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 						<label for="Details">Message Details</label>
 
 						<textarea style = "height:20%;width:100%" id="message-detail" name = "msgdetail"placeholder="Your Message Here" name="detail" maxlength="5000"> 

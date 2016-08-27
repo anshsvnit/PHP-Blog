@@ -5,8 +5,8 @@ $id = $_SESSION['id'];
 $user = $_SESSION['username'];
 
 function parsehash($string){
-  preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
-  return $tagarray;
+	preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
+	return $tagarray;
 }
 
 if(isset($_GET['chd']) && isset($_GET['fun'])){
@@ -80,10 +80,10 @@ function displayblank($tmp){
 	elseif ($tmp == "A") {
 		$string = "Accepted";
 	}
-echo "<div style='
-    align-content: center;
-    text-align: -webkit-center;
-    font-size: xx-large;'>";
+	echo "<div style='
+	align-content: center;
+	text-align: -webkit-center;
+	font-size: xx-large;'>";
 
 	echo "<img src = 'images/blank.jpg' alt ='No Blog' style='align:centre;width:304px;height:228px;'>";
 	echo "<p style='color: gold;'>There are no ".$string." to display.</p>";
@@ -139,7 +139,7 @@ function display_blogs($priviledge){
 			if($priviledge == "admin" && $_SESSION['username']=="admin"){
 				if($status == "A"){
 					$var2 = $GLOBALS['tmp'];
-					echo "<center><div style='background-color: #c71585;width: 70%;'>";
+					echo "<center><div style='background-color: #751b1b;width: 70%;'>";
 					echo "<div class='style-button'><i class='small material-icons'>thumb_down</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=R'>Reject</a></div>";
 					echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
 					echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
@@ -147,7 +147,7 @@ function display_blogs($priviledge){
 				}
 				elseif($status == "W"){
 					$var2 = $GLOBALS['tmp'];
-					echo "<center><div style='background-color: #c71585;width: 70%;'>";
+					echo "<center><div style='background-color: #751b1b;width: 70%;'>";
 					echo "<div class='style-button'><i class='small material-icons'>thumb_up</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a></div>";
 					echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
 					echo "<div class='style-button' style = 'padding-left : 15%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=A&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
@@ -156,7 +156,7 @@ function display_blogs($priviledge){
 
 				}
 				elseif ($status == "R") {
-					echo "<center><div style='background-color: #c71585;width: 70%;'>";
+					echo "<center><div style='background-color: #751b1b;width: 70%;'>";
 
 					$var2 = $GLOBALS['tmp'];
 					echo "<div class='style-button'><i class='small material-icons'>thumb_up</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=A'>Accept</a></div>";
@@ -169,7 +169,7 @@ function display_blogs($priviledge){
 			elseif($priviledge == $_SESSION['username']){
 				$var2 = $GLOBALS['tmp'];
 
-				echo "<center><div style='background-color: #c71585;width: 70%;'>";
+				echo "<center><div style='background-color: #751b1b;width: 70%;'>";
 				echo "<div class='style-button'><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
 				echo "<div class='style-button' style = 'padding-left : 18%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
 				echo "</div></center>";
@@ -182,57 +182,57 @@ function display_blogs($priviledge){
 
 
 <html>
- <head>
- 	<!--Import Google Icon Font-->
- 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- 	<!--Import materialize.css-->
- 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
- 	<link type="text/css" rel="stylesheet" href="css/style.css">
- 	<!--Let browser know website is optimized for mobile-->
- 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- 	<nav>
- 		<div class="nav-wrapper" style = "background-color: #ff4343;">
- 			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
- 			<ul id="nav-mobile" class="right hide-on-med-and-down">
- 				<?php if(login()){
- 					echo "<li>Hi ".$_SESSION['username']."</li>";
- 					echo " <li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>";
- 					echo "<li><a href='home.php'>Home</a></li>";
+<head>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<nav>
+		<div class="nav-wrapper" style = "background-color: #ff4343;">
+			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<?php if(login()){
+					echo "<li>Hi ".$_SESSION['username']."</li>";
+					echo " <li><a class='modal-trigger' href="."#profile_modal".">My Profile</a></li>";
+					echo "<li><a href='home.php'>Home</a></li>";
 
- 				}?>
+				}?>
 
- 				<?php if($priviledge=="admin"){
- 					$link = "edituser.php";
- 					echo "<li><a href= ".$link." >Edit User</a></li>";
- 					echo "<li><a href='displaymessage.php'>Messages</a></li>";
- 				}
- 				else{
- 					if($GLOBALS['userstatus'] == "N"){
- 						echo "<li><a href='newblog.php' class = 'disabled'>Add Blog</a></li>";
- 					}
- 					else {
- 						echo "<li><a href='newblog.php'>Add Blog</a></li>";
+				<?php if($priviledge=="admin"){
+					$link = "edituser.php";
+					echo "<li><a href= ".$link." >Edit User</a></li>";
+					echo "<li><a href='displaymessage.php'>Messages</a></li>";
+				}
+				else{
+					if($GLOBALS['userstatus'] == "N"){
+						echo "<li><a href='newblog.php' class = 'disabled'>Add Blog</a></li>";
+					}
+					else {
+						echo "<li><a href='newblog.php'>Add Blog</a></li>";
 
- 					}
- 					echo "<li><a href='message.php'>Contact Us</a></li>";
- 				}
+					}
+					echo "<li><a href='message.php'>Contact Us</a></li>";
+				}
 
- 				?>
- 				<li><a href="signout.php">Sign Out</a></li>
- 			</ul>
- 		</div>
- 	</nav>
-    </head>
+				?>
+				<li><a href="signout.php">Sign Out</a></li>
+			</ul>
+		</div>
+	</nav>
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.modal-trigger').leanModal();
+		})	
+		
+	</script>
+</head>
 
 <body class = "card-panel indigo darken-4">
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-     <script type="text/javascript" src="js/materialize.min.js"></script>
-     <script>
-     	$(document).ready(function(){
-     		$('.modal-trigger').leanModal();
-     	})	
-    	 
-     </script>
 	<div>
 		<p>
 			<a class="waves-effect waves-light btn" style = 'font-size:30;width: 32%;'href = '?get=A'><i class="medium material-icons left">done</i>Accepted Blogs</a>
@@ -265,17 +265,17 @@ function display_blogs($priviledge){
 			<a href='#!' class=' modal-action modal-close waves-effect waves-green btn-flat'>Close</a>
 		</div>
 	</div>
-";
-?>
-
-<div>
-	<?php
-
-	function redirect(){
-
-		header('location:display.php?get=A');
-	}
+	";
 	?>
-</div>
-	</body>
-	</html>
+
+	<div>
+		<?php
+
+		function redirect(){
+
+			header('location:display.php?get=A');
+		}
+		?>
+	</div>
+</body>
+</html>

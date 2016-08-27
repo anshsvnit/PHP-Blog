@@ -102,12 +102,14 @@ $num_rows = mysqli_num_rows($result);
 
 <center>
 <div style="width : 60%; margin : 2%; padding : 5%;">
- <table class="striped centered">
+ <table class="striped centered" style="
+    background-color: wheat;
+">
         <thead>
           <tr>
-              <th data-field="id" style="width:15%;color: #ff8585;">BloggerId</th>
-              <th data-field="name" style="width:45%;color: #ff8585;">Username</th>
-              <th data-field="status" style="width:40%;color: #ff8585;">Status</th>
+              <th data-field="id" style="width:15%;color: #000000;">BloggerId</th>
+              <th data-field="name" style="width:45%;color: #000000;">Username</th>
+              <th data-field="status" style="width:40%;color: #000000;">Status</th>
           </tr>
         </thead>
 

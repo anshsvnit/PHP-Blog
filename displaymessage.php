@@ -2,10 +2,20 @@
 require 'connect.php';
 require 'session.php';
 
+if (isset($_GET['delete'])){
+  $id = $_GET['delete'];
+  $sql = "DELETE FROM `contact` WHERE `id` = '$id'";
+  mysqli_query($db,$sql);
+}
+elseif(isset($_GET['mark'])){
+  $id = $_GET['mark'];
+  $sql = "UPDATE `contact` SET `status` = 'R' WHERE `id` = '$id'";
+  mysqli_query($db,$sql);
+}
 
 
 
-$sql = "SELECT * FROM `contact` ORDER BY `status`";
+$sql = "SELECT * FROM `contact` ORDER BY `status` DESC";
 $result = mysqli_query($db,$sql);
 $num_query= mysqli_num_rows($result);
 ?>
@@ -32,7 +42,12 @@ $num_query= mysqli_num_rows($result);
     </div>
   </nav>
 </head>
-<body>
+<body class ="indigo darken-4">
+<div style="text-align: center;">
+<h2 class ="indigo darken-4" style ="color:yellow;">Messages</h2>
+</div>
+
+
 <?php
 for($i =0; $i<$num_query;$i++){
 $row = mysqli_fetch_row($result);
@@ -42,16 +57,26 @@ $row = mysqli_fetch_row($result);
 
 
  <div class="row">
-        <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
+        <div class="col s12 m6" style="float: none;margin:  0 auto;">
+          <div class="card " style="background-color: #1997ff;">
             <div class="card-content white-text">
-              <span class="card-title"><?php echo $row[2]?></span>
-              <p>By <?php echo $row[1]?></p>
-              <p><?php echo $row[3]?></p>
+              <span class="card-title" style="
+    font-size: xx-large;
+    font-weight: 700;
+"><?php echo $row[2]?></span>
+              <p style="
+    font-size: small;
+    font-style: italic;
+">By <?php echo $row[1]?></p>
+              <p style="
+    font-size: x-large;
+"><?php echo $row[3]?></p>
             </div>
             <div class="card-action">
-              <a href="#">Mark as Read</a>
-              <a href="#">Delete</a>
+            <?php if ($row[4] == "U"){
+              echo "<a href='?mark='".$row[0]."'>Mark as Read</a>";
+              }?>
+              <a href="?delete=<?php echo $row[0]?>">Delete</a>
             </div>
           </div>
         </div>

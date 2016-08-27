@@ -116,10 +116,10 @@ if($num_query == 0 ){
         </div>
         <div class='card-action'>
         <?php
-        $i=0;
-        while(!empty($tagarray[0][$i])){
-          echo "<a href = '?hash=".substr($tagarray[0][$i], 1)."'>".$tagarray[0][$i]."</a>";
-          $i++;
+        $j=0;
+        while(!empty($tagarray[0][$j])){
+          echo "<a href = '?hash=".substr($tagarray[0][$j], 1)."'>".$tagarray[0][$j]."</a>";
+          $j++;
         }
         ?>
 
