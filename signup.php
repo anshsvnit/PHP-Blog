@@ -189,18 +189,17 @@ if(login()){
 						$c = $_POST["contact"];
 
 					if(checkduplicate($u,$e)=="TRUE"){
-											echo "<script>alert('reached ". $c."');</script>";
 
-						$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`aboutme`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$abtme',$c','$file')";
-						//$db = $GLOBALS['db'];
-						mysqli_query($db,$sql);
-						echo mysql_errno($db) . ": " . mysql_error($db) . "\n";
-						//echo mysql_error($db);
-						//header('Refresh: 2;URL= contact_admin.php');
-						
-						//else
+						$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`aboutme`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$abtme','$c','$file')";
+						$db = $GLOBALS['db'];
+						if(mysqli_query($db,$sql)){
+						echo "<script>alert('Data inserted successfully');</script>";
+
+						header('Refresh: 2;URL= contact_admin.php');
+						}
+						else
 						{
-						//	echo "<script>alert('Something went wrong.Please try again');</script>";
+							echo "<script>alert('Something went wrong.Please try again');</script>";
 
 						}
 
