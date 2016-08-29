@@ -12,11 +12,11 @@ function parsehash($string){
 }
 
 if(isset($_GET['hash'])){
-	$hash = $_GET['hash'];
+  $hash = $_GET['hash'];
 
-	$sql = "SELECT `blog_id`, `blogger_id`, `title`, `detail`,`category`,`updated_on` FROM `blogs` WHERE `status` = 'A' AND `category` LIKE '%$hash%' ORDER BY updated_on DESC";
-	$result = mysqli_query($db,$sql);
-	$num_query = mysqli_num_rows($result);
+  $sql = "SELECT `blog_id`, `blogger_id`, `title`, `detail`,`category`,`updated_on` FROM `blogs` WHERE `status` = 'A' AND `category` LIKE '%$hash%' ORDER BY updated_on DESC";
+  $result = mysqli_query($db,$sql);
+  $num_query = mysqli_num_rows($result);
 }
 else{
   $sql = "SELECT `blog_id`, `blogger_id`, `title`, `detail`,`category`,`updated_on` FROM `blogs` WHERE `status` = 'A' ORDER BY updated_on DESC";
@@ -37,9 +37,7 @@ else{
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <nav>
     <div class="nav-wrapper" style = "background-color: #ff4343;">
-      <a href="index.php" class="brand-logo" style="
-    padding-left: 30px;
-">Blogger</a>
+      <a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <?php if(login()){
           echo "<li>Hi ".$_SESSION['username']."</li>";
@@ -66,7 +64,7 @@ else{
 </head>
 
 <body class ="indigo darken-4">
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
  <script type="text/javascript" src="js/materialize.min.js"></script>
 
 
@@ -97,12 +95,12 @@ if($num_query == 0 ){
    }
    $tagarray = parsehash($arr_result[4]);
 
-	$status = $arr_result[5];
-	$blog_id =  $arr_result[0];
-	echo $arr_result[1];?>
+  $status = $arr_result[5];
+  $blog_id =  $arr_result[0];
+  echo $arr_result[1];?>
 
-	
-	<div class='row'>
+  
+  <div class='row'>
     <div style='margin: 0 auto;width:50%'>
       <div class='card large'>
         <div class='card-image'>

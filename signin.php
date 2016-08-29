@@ -20,10 +20,6 @@ function checkuser ($username,$password,$caller){
 			$num=mysqli_num_rows($result);
 			$row = mysqli_fetch_assoc($result);
 			$GLOBALS['id']= $row['Id'];
-			/*echo $username;
-			echo $caller;
-			echo $num;*/
-			//$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 			return $num;
 			}
 ?>
@@ -41,9 +37,7 @@ function checkuser ($username,$password,$caller){
 
 	<nav>
 		<div class="nav-wrapper" style = "background-color: #ff4343;">
-			<a href="index.php" class="brand-logo" style="
-    padding-left: 30px;
-">Blogger</a>
+			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
 								<li><a href="Signup.php">Signup</a></li>
@@ -80,7 +74,7 @@ function checkuser ($username,$password,$caller){
 			</div>
 			<div class="row">
 
-				<a href="forget.php">Forgot your password?</a>
+				<a href="forgot.php">Forgot your password?</a>
 			</div>
 
 			<input  type="submit" name="login" value="Login">
@@ -132,7 +126,6 @@ if (isset($_POST['login'])){
 				$_SESSION['id'] = $GLOBALS['id'];
 				$_SESSION['login-with-blog'] = 1;
 				setcookie("username",$u,time()+60*60*24);
-				//echo $GLOBALS['id'];
 				if ($rm == "on"){
 					setcookie("	username",$_POST['username'],time()+60*60*24);
 				}

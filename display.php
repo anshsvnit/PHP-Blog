@@ -9,6 +9,34 @@ function parsehash($string){
 	return $tagarray;
 }
 
+function userdetails($id){
+$db = $GLOBALS['db'];
+$sql2 = "SELECT `status` FROM `userdetails` WHERE `Id`= '$id'";
+$result2 = mysqli_query($db, $sql2);
+$resultarray = mysqli_fetch_row($result2);
+ return $resultarray[0];
+}
+
+function displayblank($tmp){
+	if($tmp == "W"){
+		$string = "Waitlisted";
+	}
+	elseif ($tmp == "R") {
+		$string = "Rejected";
+	}
+	elseif ($tmp == "A") {
+		$string = "Accepted";
+	}
+	echo "<div style='
+	align-content: center;
+	text-align: -webkit-center;
+	font-size: xx-large;'>";
+
+	echo "<img src = 'images/blank.jpg' alt ='No Blog' style='align:centre;width:304px;height:228px;'>";
+	echo "<p style='color: gold;'>There are no ".$string." to display.</p>";
+	echo "</div>";
+}
+
 if(isset($_GET['chd']) && isset($_GET['fun'])){
 	$var = $_GET['chd'];
 	$var1 = $_GET['get'];
@@ -63,32 +91,10 @@ else
 
 require 'blog_request.php';
 
-$db = $GLOBALS['db'];
-$sql2 = "SELECT `status` FROM `userdetails` WHERE `Id`= '$id'";
-$result2 = mysqli_query($db, $sql2);
-$resultarray = mysqli_fetch_row($result2);
-$userstatus= $resultarray[0];
+$userstatus= userdetails($id);
 
 $priviledge = $GLOBALS['priviledge'];
-function displayblank($tmp){
-	if($tmp == "W"){
-		$string = "Waitlisted";
-	}
-	elseif ($tmp == "R") {
-		$string = "Rejected";
-	}
-	elseif ($tmp == "A") {
-		$string = "Accepted";
-	}
-	echo "<div style='
-	align-content: center;
-	text-align: -webkit-center;
-	font-size: xx-large;'>";
 
-	echo "<img src = 'images/blank.jpg' alt ='No Blog' style='align:centre;width:304px;height:228px;'>";
-	echo "<p style='color: gold;'>There are no ".$string." to display.</p>";
-	echo "</div>";
-}
 
 
 function display_blogs($priviledge){

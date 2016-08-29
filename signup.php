@@ -7,6 +7,45 @@ if(login()){
 	else
 		header('location:home.php');
 }
+
+function checkforimage(){
+	$allowed = array('gif','png' ,'jpg');
+	$filename = $_FILES['file']['name'];
+	$ext = pathinfo($filename, PATHINFO_EXTENSION);
+	if(!in_array($ext,$allowed)) 
+		echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
+	else{
+		$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
+		return $file;
+	}
+
+}
+
+function checkduplicate($u,$e){
+		$db=mysqli_connect("localhost","root","","datablog") or die("Can not connect right now!");
+
+		$sql1="SELECT `userName` FROM `userdetails` WHERE `username` = '$u'";
+		$sql2 = "SELECT `email` FROM `userdetails` WHERE `email` = '$e'";
+
+		$result1 = mysqli_query($db,$sql2);
+		$num1=mysqli_num_rows($result1);
+		$result = mysqli_query($db,$sql1);
+		$num = mysqli_num_rows($result);
+		if($num>0){
+			echo "<script>alert('Username already taken please select other username');</script>";
+			return "FALSE";
+		}
+
+		elseif($num1>0){
+			echo "<script>alert('Email is already in use');</script>";
+			return "FALSE";
+		}
+
+		else{
+			return "TRUE";
+		}
+	}
+
 ?>
 
 
@@ -40,46 +79,46 @@ if(login()){
 		<div class="row" style= 'width:50%;margin:30px auto;'>
 			<form class=" card-panel" style ="padding: 40px;background-color: #fdf8e4;" action = "signup.php" method = "POST" enctype = "multipart/form-data"> 
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 						<input  type = "text" name = "fname" placeholder="First Name" maxlength = 30 required>
 						<label for="First">First name</label>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 						<label for="Last-Name">Last name</label>
 
-						<input class="image-replace cd-username" type = "text" name = "lname" placeholder="Last Name" maxlength = 30 required>
+						<input  type = "text" name = "lname" placeholder="Last Name" maxlength = 30 required>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<label for="signup-username">Email Address </label>
 
-						<input class="image-replace cd-username" type = "email" name = "emailaddr" placeholder="Email Address" required> 
+						<input  type = "email" name = "emailaddr" placeholder="Email Address" required> 
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 
 						<label for="signup-username">Username</label>
 
-						<input class="image-replace cd-username" type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
+						<input  type = "text" name = "username" placeholder="User Name" maxlength = 30 required>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<label for="signup-username">Password</label>
 
-						<input class="image-replace cd-username" type = "password" name = "password" placeholder="Password" required> 
+						<input type = "password" name = "password" placeholder="Password" required> 
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
+					<div class="input-field col s12">
 
 						<label for="signup-username">About Me</label>
 
-						<input class="image-replace cd-username" type = "text" name = "abtme" placeholder="About Me" maxlength = 30 required>
+						<input  type = "text" name = "abtme" placeholder="About Me" maxlength = 30 required>
 					</div>
 				</div>
 
@@ -87,7 +126,7 @@ if(login()){
 					<div class="input-field col s12">
 						<label for="signup-username">Contact</label>
 
-						<input class="image-replace cd-username" type = "number" name = "contact" placeholder="Contact Number"> 
+						<input type = "number" name = "contact" placeholder="Contact Number"> 
 					</div>
 				</div>
 				<div class="row">
@@ -113,50 +152,21 @@ if(login()){
 
 							<label for="signup-username">Username</label>
 
-							<input class="image-replace cd-username" type = "text" name = "userdetail" placeholder="User Name" maxlength = 30 required>
+							<input type = "text" name = "userdetail" placeholder="User Name" maxlength = 30 required>
 						</div>
 						<div class="row">
 							<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="usercheck">
 							</div>
 						</div>
 					</div>
-
-
 				</form>
-
 			</div>
-
 		</center>
 	</body>
-
 
 	</html>	
 
 	<?php
-	function checkduplicate($u,$e){
-		$db=mysqli_connect("localhost","root","","datablog") or die("Can not connect right now!");
-
-		$sql1="SELECT `userName` FROM `userdetails` WHERE `username` = '$u'";
-		$sql2 = "SELECT `email` FROM `userdetails` WHERE `email` = '$e'";
-
-		$result1 = mysqli_query($db,$sql2);
-		$num1=mysqli_num_rows($result1);
-		$result = mysqli_query($db,$sql1);
-		$num = mysqli_num_rows($result);
-		if($num>0){
-			echo "<script>alert('Username already taken please select other username');</script>";
-			return "FALSE";
-		}
-
-		elseif($num1>0){
-			echo "<script>alert('Email is already in use');</script>";
-			return "FALSE";
-		}
-
-		else{
-			return "TRUE";
-		}
-	}
 
 	if(isset($_POST["cre"]) &&  $_FILES['file']['size']>0){
 		if(empty($_POST["username"]))
@@ -167,8 +177,8 @@ if(login()){
 			echo "<script>alert('Please enter lastname');</script>";
 		else if(empty($_POST["emailaddr"]))
 			echo "<script>alert('Please enter E-mail ID');</script>";
-		else if(empty($_POST["password"]))
-			echo "<script>alert('Please enter Password');</script>";
+		else if(empty($_POST["password"]) || strlen($_POST["password"]) < 8)
+			echo "<script>alert('Please enter Password atleast 8 character long');</script>";
 		elseif(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
 		{
 			echo "<script>alert('Please upload image.')</script>";}
@@ -181,44 +191,38 @@ if(login()){
 				$p = $_POST["password"];
 				$abtme = $_POST["abtme"];
 
-				$allowed = array('gif','png' ,'jpg');
-				$filename = $_FILES['file']['name'];
-				$ext = pathinfo($filename, PATHINFO_EXTENSION);
-				if(!in_array($ext,$allowed)) 
-					echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
-				else{
-					$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));}
+				$file = checkforimage();
 
-					if(empty($_POST["contact"]))
-						$c=NULL;
+				if(empty($_POST["contact"]))
+					$c=NULL;
+				else
+					$c = $_POST["contact"];
+
+				if(checkduplicate($u,$e)=="TRUE"){
+
+					$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`aboutme`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$abtme','$c','$file')";
+					$db = $GLOBALS['db'];
+					if(mysqli_query($db,$sql)){
+						echo "<script>alert('Account created Successfully');</script>";
+
+						header('Refresh: 2;URL= signin.php');
+					}
 					else
-						$c = $_POST["contact"];
-
-					if(checkduplicate($u,$e)=="TRUE"){
-
-						$sql = "INSERT INTO `userdetails`(`userName`,`fname`,`lname`,`password`,`email`,`aboutme`,`contact`,`profile_pic`) VALUES ('$u','$f','$l','$p','$e','$abtme','$c','$file')";
-						$db = $GLOBALS['db'];
-						if(mysqli_query($db,$sql)){
-						echo "<script>alert('Data inserted successfully');</script>";
-
-						header('Refresh: 2;URL= contact_admin.php');
-						}
-						else
-						{
-							echo "<script>alert('Something went wrong.Please try again');</script>";
-
-						}
+					{
+						echo "<script>alert('Something went wrong.Please try again');</script>";
 
 					}
 
 				}
-			}
 
-			if(isset($_POST["usercheck"])){
-				$user = $_POST['userdetail'];
-				if(checkduplicate($user,"nodata")){
-					echo "<script>alert('Username Available');</script>";
-				}
 			}
+		}
 
-			?>
+		if(isset($_POST["usercheck"])){
+			$user = $_POST['userdetail'];
+			if(checkduplicate($user,"nodata")){
+				echo "<script>alert('Username Available');</script>";
+			}
+		}
+
+		?>

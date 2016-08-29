@@ -4,7 +4,6 @@ require 'connect.php';
 if($priviledge == "admin"){
 	if($tmp=="A"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='A' ORDER BY `updated_on` DESC";
-		//echo "access A ";
 	}
 	elseif ($tmp=="W"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='W' ORDER BY `updated_on` DESC";
@@ -12,7 +11,6 @@ if($priviledge == "admin"){
 	}
 	elseif($tmp=="R"){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='R' ORDER BY `updated_on` DESC";
-
 	}
 
 	$result = mysqli_query($db,$sql);
@@ -32,16 +30,13 @@ elseif($priviledge == $_SESSION['username']){
 		$sql = "SELECT * FROM `blogs` WHERE `status`='R' AND `blogger_id`= '$id' ORDER BY `updated_on` DESC";
 
 	}
-
 	$result = mysqli_query($db,$sql);
 	$num_query = mysqli_num_rows($result);
-
 }
 else{
 	$sql = "SELECT * FROM `blogs` WHERE `status`='A' ORDER BY `updated_on` DESC";
 	$result = mysqli_query($db,$sql);
 	$num_query = mysqli_num_rows($result);
-
 }
 
 ?>

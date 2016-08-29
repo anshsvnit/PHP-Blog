@@ -1,3 +1,0 @@
-left 
-admin profile
-forgot pass

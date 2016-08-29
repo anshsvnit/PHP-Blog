@@ -1,8 +1,37 @@
 <?php 
 require 'connect.php';
 require 'session.php';
-?>
-<?php
+
+function getTags($string){
+	preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
+	if(!empty($tagarray)){
+		$string = $tagarray[0][0];
+		$i=1;
+		while(!empty($tagarray[0][$i])){
+			$string.=" ";
+			$string.=$tagarray[0][$i];
+			$i++;
+		}
+		return $string;
+	}
+	else
+		return NULL;
+}
+
+function checkforimage(){
+	$allowed = array('gif','png' ,'jpg');
+	$filename = $_FILES['file']['name'];
+	$ext = pathinfo($filename, PATHINFO_EXTENSION);
+	if(!in_array($ext,$allowed)) 
+		echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
+	else{
+		$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
+		return $file;
+	}
+
+}
+
+
 if(isset($_GET['edit'])){
 	$tmp = $_GET['edit'];
 	if($tmp == "Y"){
@@ -14,9 +43,8 @@ if(isset($_GET['edit'])){
 		$row=mysqli_fetch_array($result1);
 	}
 }
-
-
 ?>
+
 <html>
 <head>
 	<!--Import Google Icon Font-->
@@ -38,8 +66,6 @@ if(isset($_GET['edit'])){
 			</ul>
 		</div>
 	</nav>
-
-
 </head>
 
 <body class ="indigo darken-4">
@@ -62,7 +88,7 @@ if(isset($_GET['edit'])){
 			<div class="fieldset">
 				<label for="signup-username">Blog Title</label>
 
-				<input class="image-replace cd-username" type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30>
+				<input type = "text" name = "blogtitle" value = "<?php if (isset($_GET['edit']))echo $row[1];?>" placeholder="Blog Title" maxlength = 30>
 			</div>
 
 			<div class="fieldset">
@@ -73,7 +99,7 @@ if(isset($_GET['edit'])){
 			<p class="fieldset">
 				<label for="signup-username">HashTags</label>
 
-				<input class="image-replace cd-username" type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
+				<input type = "text" name = "tags" value = "<?php if (isset($_GET['edit']))echo $row[3];?>" placeholder="HashTags" maxlength = 30>
 			</p>
 
 			<div class="row">
@@ -98,22 +124,6 @@ if(isset($_GET['edit'])){
 
 <?php
 
-function getTags($string){
-	preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
-	if(!empty($tagarray)){
-		$string = $tagarray[0][0];
-		$i=1;
-		while(!empty($tagarray[0][$i])){
-			$string.=" ";
-			$string.=$tagarray[0][$i];
-			$i++;
-		}
-		return $string;
-	}
-	else
-		return NULL;
-}
-
 if (isset($_POST['action']) && $_FILES['file']['size']>0){
 	if(empty($_POST['blogtitle'])){
 		echo"<script>alert('Please give Title to the Blog')</script>";
@@ -125,19 +135,12 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 	{
 		echo "<script>alert('Please upload image.')</script>";}
 
-		else{
+	else{
 
-			$allowed = array('gif','png' ,'jpg');
-			$filename = $_FILES['file']['name'];
-			$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			if(!in_array($ext,$allowed)) 
-				echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
-			else{
-				$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
+			$file = checkforimage();
 				$t=$_POST['blogtitle'];
 				$c=$_POST['detail'];
 				$id=$_SESSION['id'];
-				echo $_SESSION['id'];
 
 				$tags = getTags($_POST['tags']);
 
@@ -187,7 +190,6 @@ if (isset($_POST['action']) && $_FILES['file']['size']>0){
 
 					}
 				}
-			}
 		}
 	}
 	?>

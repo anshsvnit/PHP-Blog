@@ -1,14 +1,24 @@
 <?php 
 require 'connect.php';
 require 'session.php';
-?>
-<?php
+
 function getemail($id){
 	$db = $GLOBALS['db'];
 	$sql1 = "SELECT `email` FROM `userdetails` WHERE `Id` = '$id'";
 	$result = mysqli_query($db,$sql1);
 	$row = mysqli_fetch_row($result);
 	return $row[0];
+}
+
+function insertdetails($email, $title, $detail){
+	$db = $GLOBALS['db'];
+	$sql = "INSERT INTO `contact`(`email`,`subject`,`message`) VALUES ('$email', '$title','$detail')";
+	if(mysqli_query($db,$sql)){
+		echo "<script>alert('Message sent to admin');</script>";
+	}
+	else {
+		echo "<script>alert('There was a problem contacting admin');</script>";
+	}
 }
 
 ?>
@@ -24,9 +34,7 @@ function getemail($id){
 
 	<nav>
 		<div class="nav-wrapper" style = "background-color: #ff4343;">
-			<a href="index.php" class="brand-logo" style="
-    padding-left: 30px;
-">Blogger</a>
+			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="message.php">Contact Us</a></li>
@@ -46,7 +54,6 @@ function getemail($id){
 				<div class="row">
 					<div class="input-field col s12">
 						<label for="Title">Title</label>
-
 						<input  type = "text" name = "title" placeholder="Message Title" maxlength = 30 required>
 					</div>
 				</div>
@@ -54,29 +61,27 @@ function getemail($id){
 					<div class="input-field col s12">
 						<label for="Details">Message Details</label>
 
-						<textarea style = "height:20%;width:100%" id="message-detail" name = "msgdetail"placeholder="Your Message Here" name="detail" maxlength="5000"> 
-				</textarea>
+						<textarea style = "height:20%;width:100%" id="message-detail" name = "msgdetail" placeholder="Your Message Here" name="detail" maxlength="5000"> 
+						</textarea>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<label for="signup-username"></label>
 
-						<input class="image-replace cd-username" type = <?php if (login()){echo "hidden";} else {echo "email";}?>
-						 name = "emailaddr" placeholder="Email Address" required> 
+						<input type = <?php if (login()){echo "hidden";} else {echo "email";}?>
+						name = "emailaddr" placeholder="Email Address" required> 
 					</div>
 				</div>
-
 				<input class="btn waves-effect waves-light" Value = "submit" type="submit" name="submit">
-
 			</form>
 			
 		</div>
-		</center>
-		</body>
-		</html>
+	</center>
+</body>
+</html>
 
-		<?php
+<?php
 if (isset($_POST['submit'])){
 		if(empty($_POST["title"]))
 			echo "<script>alert('Please enter title');</script>";
@@ -96,15 +101,7 @@ if (isset($_POST['submit'])){
 			else{
 				$email = $_POST['emailaddr'];
 			}
-
-			$sql = "INSERT INTO `contact`(`email`,`subject`,`message`) VALUES ('$email', '$title','$detail')";
-			if(mysqli_query($db,$sql)){
-				echo "<script>alert('Message sent to admin');</script>";
-
-			}
-			else {
-					echo "<script>alert('There was a problem contacting admin');</script>";
-			}
+			insertdetails($email, $title, $detail);
 		}
 }
 ?>
