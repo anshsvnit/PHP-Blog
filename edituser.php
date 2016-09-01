@@ -30,7 +30,6 @@ function deleteuserdata($id){
 
 }
 
-
 if(isset($_GET['delete'])){
   if($_GET['delete']=="true"){
     $id = $_GET['id'];
@@ -54,12 +53,10 @@ elseif(isset($_GET['deact'])){
   }
 }
 
-
 $sql = "SELECT `Id`, `userName` , `status` FROM `userdetails`";
 $result = mysqli_query($db,$sql);
 $num_rows = mysqli_num_rows($result);
 ?>
-
 
 <html>
 <head>
@@ -92,11 +89,11 @@ $num_rows = mysqli_num_rows($result);
     $('.dropdown-button').dropdown({
       inDuration: 300,
       outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
-      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+      constrain_width: false, 
+      hover: true, 
+      gutter: 0, 
+      belowOrigin: false,
+      alignment: 'left' 
     }
     );
   </script>
@@ -132,8 +129,7 @@ $num_rows = mysqli_num_rows($result);
             echo '<td>';
             echo "<a class='dropdown-button btn' data-activates='dropdown".$blogger_id."'>Action</a>
             <ul id='dropdown".$blogger_id."' class='dropdown-content'>";
-   //echo "<li><a href='#'".$blogger_id."'>Profile</a></li>";
-
+            
              if($row['status'] == "N"){
               echo "<li><a href='?act=true&id=".$blogger_id."'>Activate</a></li>";
             }

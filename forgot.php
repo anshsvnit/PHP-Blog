@@ -20,9 +20,7 @@ function checkuser($u,$e,$c){
 	else 
 		return 0;
 }
-
 ?>
-
 
 <html>
 <head>
@@ -111,8 +109,6 @@ function checkuser($u,$e,$c){
 				echo "<script>alert('The Password for entered user is ".$checkuser."');</script>";
 
 			}
-
-				}
-
-			}
+		}
+	}
 		?>

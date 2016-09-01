@@ -10,7 +10,6 @@ else {
       header('location:index.php');
 }
 
-
 if (isset($_GET['delete'])){
   $id = $_GET['delete'];
   $sql = "DELETE FROM `contact` WHERE `id` = '$id'";

@@ -1,13 +1,10 @@
 <?php 
 require 'connect.php';
+require 'commonutilities.php';
 
 $id = $_SESSION['id'];
 $user = $_SESSION['username'];
 
-function parsehash($string){
-	preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
-	return $tagarray;
-}
 
 function userdetails($id){
 $db = $GLOBALS['db'];
@@ -95,8 +92,6 @@ $userstatus= userdetails($id);
 
 $priviledge = $GLOBALS['priviledge'];
 
-
-
 function display_blogs($priviledge){
 	$num_query = $GLOBALS['num_query'];
 	$result = $GLOBALS['result'];
@@ -172,20 +167,10 @@ function display_blogs($priviledge){
 
 				}
 			}
-			elseif($priviledge == $_SESSION['username']){
-				$var2 = $GLOBALS['tmp'];
-
-				echo "<center><div style='background-color: #751b1b;width: 70%;'>";
-				echo "<div class='style-button'><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
-				echo "<div class='style-button' style = 'padding-left : 18%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
-				echo "</div></center>";
-
-			}
 		}
 	}
 }
 ?>
-
 
 <html>
 <head>
@@ -273,15 +258,6 @@ function display_blogs($priviledge){
 	</div>
 	";
 	?>
-
-	<div>
-		<?php
-
-		function redirect(){
-
-			header('location:display.php?get=A');
-		}
-		?>
 	</div>
 </body>
 </html>

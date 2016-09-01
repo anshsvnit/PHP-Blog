@@ -1,15 +1,8 @@
 <?php
 require 'session.php';
 require 'connect.php';
+require 'commonutilities.php';
 
-if(isset($_SESSION['username'])){
-
-}
-
-function parsehash($string){
-  preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
-  return $tagarray;
-}
 
 if(isset($_GET['hash'])){
   $hash = $_GET['hash'];

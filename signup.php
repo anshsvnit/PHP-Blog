@@ -1,24 +1,13 @@
 <?php 
 require 'connect.php';
 require 'session.php';
+require 'commonutilities.php';
+
 if(login()){
 	if($_SESSION['username']=="admin")
 		header('location:admin.php');
 	else
 		header('location:home.php');
-}
-
-function checkforimage(){
-	$allowed = array('gif','png' ,'jpg');
-	$filename = $_FILES['file']['name'];
-	$ext = pathinfo($filename, PATHINFO_EXTENSION);
-	if(!in_array($ext,$allowed)) 
-		echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
-	else{
-		$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
-		return $file;
-	}
-
 }
 
 function checkduplicate($u,$e){
@@ -35,19 +24,15 @@ function checkduplicate($u,$e){
 			echo "<script>alert('Username already taken please select other username');</script>";
 			return "FALSE";
 		}
-
 		elseif($num1>0){
 			echo "<script>alert('Email is already in use');</script>";
 			return "FALSE";
 		}
-
 		else{
 			return "TRUE";
 		}
 	}
-
 ?>
-
 
 <html>
 <head>
@@ -210,11 +195,8 @@ function checkduplicate($u,$e){
 					else
 					{
 						echo "<script>alert('Something went wrong.Please try again');</script>";
-
 					}
-
 				}
-
 			}
 		}
 

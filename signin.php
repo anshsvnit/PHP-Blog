@@ -15,7 +15,7 @@ function checkuser ($username,$password,$caller){
 			$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username' and `password`= '$password'";}
 			else
 			{
-				$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username'";}
+			$sql = "SELECT `Id`,`userName`,`password` FROM `userdetails` WHERE `username`= '$username'";}
 			$result = mysqli_query($db,$sql);
 			$num=mysqli_num_rows($result);
 			$row = mysqli_fetch_assoc($result);
@@ -40,9 +40,9 @@ function checkuser ($username,$password,$caller){
 			<a href="index.php" class="brand-logo" style="padding-left: 30px;">Blogger</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a href="index.php">Home</a></li>
-								<li><a href="Signup.php">Signup</a></li>
+				<li><a href="Signup.php">Signup</a></li>
 
-				        <li><a href="message.php">Contact Us</a></li>
+				<li><a href="message.php">Contact Us</a></li>
 
 
 			</ul>
@@ -88,22 +88,7 @@ function checkuser ($username,$password,$caller){
 
 <?php
 
-if(isset($_POST['check'])){
-	$u = $_POST['username'];
-	if (checkuser($u,"","check")>=1)
-	{ 
-		echo "<script>alert('The username is taken')</script>";
-		unset($_POST['check']);
-	} 
-	else {
-		echo "<script>alert('Username is available')</script>";
-				unset($_POST['check']);
-
-	}
-}
-
 if (isset($_POST['login'])){
-	echo "inside if";
 	$GLOBALS['checkstatus']=0;
 	if(empty($_POST['username']))
 		echo "<script>alert('Please enter username')</script>";
@@ -126,9 +111,7 @@ if (isset($_POST['login'])){
 				$_SESSION['id'] = $GLOBALS['id'];
 				$_SESSION['login-with-blog'] = 1;
 				setcookie("username",$u,time()+60*60*24);
-				if ($rm == "on"){
-					setcookie("	username",$_POST['username'],time()+60*60*24);
-				}
+				
 				if($_SESSION["username"]=="admin")
 					header("location:admin.php");
 				else {

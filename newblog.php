@@ -1,36 +1,7 @@
 <?php 
 require 'connect.php';
 require 'session.php';
-
-function getTags($string){
-	preg_match_all ("/(#(.*)\s)|(#(.*)$)/U", $string, $tagarray);
-	if(!empty($tagarray)){
-		$string = $tagarray[0][0];
-		$i=1;
-		while(!empty($tagarray[0][$i])){
-			$string.=" ";
-			$string.=$tagarray[0][$i];
-			$i++;
-		}
-		return $string;
-	}
-	else
-		return NULL;
-}
-
-function checkforimage(){
-	$allowed = array('gif','png' ,'jpg');
-	$filename = $_FILES['file']['name'];
-	$ext = pathinfo($filename, PATHINFO_EXTENSION);
-	if(!in_array($ext,$allowed)) 
-		echo "<script>alert('".$ext." file format is not allowed. Upload jpg, png or gif format only.')</script>";
-	else{
-		$file=addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
-		return $file;
-	}
-
-}
-
+require 'commonutilities.php';
 
 if(isset($_GET['edit'])){
 	$tmp = $_GET['edit'];
@@ -104,7 +75,7 @@ if(isset($_GET['edit'])){
 
 			<div class="row">
 				<div class="input-field col s12">
-					<label for="signup-username">Upload a file</label>
+					<label for="signup-username">Upload an image</label>
 					<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 					<input name="file" type="file" id="file"> 
 				</div>
