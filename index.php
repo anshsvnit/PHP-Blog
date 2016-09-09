@@ -103,7 +103,7 @@ if($num_query == 0 ){
 
         </div>
         <div class='card-content'>
-          <p><?php echo $arr_result[3]?></p>
+          <p><b><?php echo $arr_result[3]?></b></p>
         </div>
         <div class='card-action'>
         <?php

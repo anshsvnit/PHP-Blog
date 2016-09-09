@@ -122,7 +122,7 @@ function display_blogs($priviledge){
 							<span class='card-title' style = 'left:85%'>".$usernameblogger[0]."</span>
 						</div>
 						<div class='card-content'>
-							<p>".$arr_result[3]."</p>
+							<p><b>".$arr_result[3]."</b></p>
 						</div>
 						<div class='card-action'>";
 							$j=0;
@@ -166,6 +166,13 @@ function display_blogs($priviledge){
 					echo "</div></center>";
 
 				}
+			}
+			elseif($priviledge == $_SESSION['username']){
+				$var2 = $GLOBALS['tmp'];
+				echo "<center><div style='background-color: #751b1b;width: 70%;'>";
+				echo "<div class='style-button'><i class='small material-icons'>stop</i><a href = '?get=".$var2."&chd=".$arr_result[0]."&fun=D'>DELETE</a></div>";
+				echo "<div class='style-button' style = 'padding-left : 18%;''><i class='small material-icons'>mode_edit</i><a href = 'newblog.php?sender=U&edit=Y&blogid=".$arr_result[0]."'>Edit</a></div>";	
+				echo "</div></center>";
 			}
 		}
 	}
